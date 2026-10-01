@@ -193,4 +193,83 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     revealObserver.observe(el);
   });
+
+  // 6. 3D CASCADING FANNED DECK PARALLAX & ACTIVE CARD CONTROLLER (Jake Sinclair Style)
+  const stageWrapper = document.getElementById('deck-stage-wrapper');
+  const deckFanned = document.getElementById('deck-fanned');
+  const fannedCards = document.querySelectorAll('.fanned-card');
+
+  if (stageWrapper && deckFanned) {
+    const baseRotX = 12;
+    const baseRotY = 16;
+    const baseRotZ = -22;
+
+    let targetOffsetX = 0;
+    let targetOffsetY = 0;
+    let targetOffsetZ = 0;
+    let currentOffsetX = 0;
+    let currentOffsetY = 0;
+    let currentOffsetZ = 0;
+    let isHovering = false;
+    let animId = null;
+
+    const lerp = (start, end, factor) => start + (end - start) * factor;
+
+    function render3DTilt() {
+      currentOffsetX = lerp(currentOffsetX, targetOffsetX, 0.08);
+      currentOffsetY = lerp(currentOffsetY, targetOffsetY, 0.08);
+      currentOffsetZ = lerp(currentOffsetZ, targetOffsetZ, 0.08);
+
+      const rotX = baseRotX + currentOffsetY;
+      const rotY = baseRotY + currentOffsetX;
+      const rotZ = baseRotZ + currentOffsetZ;
+
+      deckFanned.style.transform = `translateX(40px) rotateZ(${rotZ.toFixed(2)}deg) rotateY(${rotY.toFixed(2)}deg) rotateX(${rotX.toFixed(2)}deg)`;
+
+      if (Math.abs(targetOffsetX - currentOffsetX) > 0.01 || Math.abs(targetOffsetY - currentOffsetY) > 0.01 || isHovering) {
+        animId = requestAnimationFrame(render3DTilt);
+      } else {
+        animId = null;
+      }
+    }
+
+    stageWrapper.addEventListener('pointermove', (e) => {
+      const rect = stageWrapper.getBoundingClientRect();
+      const normX = (e.clientX - rect.left) / rect.width - 0.5; // -0.5 to 0.5
+      const normY = (e.clientY - rect.top) / rect.height - 0.5;
+
+      targetOffsetX = normX * 18;
+      targetOffsetY = -normY * 16;
+      targetOffsetZ = normX * 8;
+      isHovering = true;
+
+      if (!animId) {
+        animId = requestAnimationFrame(render3DTilt);
+      }
+    });
+
+    stageWrapper.addEventListener('pointerleave', () => {
+      targetOffsetX = 0;
+      targetOffsetY = 0;
+      targetOffsetZ = 0;
+      isHovering = false;
+      
+      // Clear active card highlight on leave
+      deckFanned.classList.remove('has-active');
+      fannedCards.forEach(card => card.classList.remove('is-active'));
+
+      if (!animId) {
+        animId = requestAnimationFrame(render3DTilt);
+      }
+    });
+
+    // Zero-Flicker Card State Management (Steps card to front)
+    fannedCards.forEach(card => {
+      card.addEventListener('pointerenter', () => {
+        deckFanned.classList.add('has-active');
+        fannedCards.forEach(c => c.classList.remove('is-active'));
+        card.classList.add('is-active');
+      });
+    });
+  }
 });

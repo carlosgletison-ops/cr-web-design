@@ -1811,3 +1811,444 @@ img {
     display: none;
   }
 }
+
+/* ==========================================================================
+   3D INTERACTIVE SHOWCASE DECK (Awwwards / Jake Sinclair style)
+   ========================================================================== */
+.section-3d-showcase {
+  position: relative;
+  background: #080A0F;
+  color: #FFFFFF;
+  padding: 6rem 0 3.5rem;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Background Atmospheric Glows */
+.section-3d-showcase::before {
+  content: '';
+  position: absolute;
+  top: 10%;
+  right: 15%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(13, 91, 255, 0.18) 0%, transparent 70%);
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.section-3d-showcase::after {
+  content: '';
+  position: absolute;
+  bottom: 5%;
+  left: 10%;
+  width: 450px;
+  height: 450px;
+  background: radial-gradient(circle, rgba(0, 229, 255, 0.12) 0%, transparent 70%);
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.showcase-container {
+  display: grid;
+  grid-template-columns: minmax(360px, 460px) 1fr;
+  gap: 2.5rem;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+  margin-bottom: 4rem;
+}
+
+/* Left Intro Column */
+.showcase-intro {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  position: relative;
+  z-index: 10;
+}
+
+.showcase-badge {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.9rem;
+  background: rgba(13, 91, 255, 0.12);
+  border: 1px solid rgba(13, 91, 255, 0.35);
+  border-radius: var(--radius-full);
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #00E5FF;
+}
+
+.badge-dot {
+  width: 7px;
+  height: 7px;
+  background: #00E5FF;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #00E5FF;
+  animation: pulseDot 2s infinite ease-in-out;
+}
+
+@keyframes pulseDot {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.4); opacity: 0.6; }
+}
+
+.showcase-title {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 3.2vw, 3rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  color: #FFFFFF;
+}
+
+.showcase-title .highlight-blue {
+  color: #3B82F6;
+  display: inline;
+}
+
+.showcase-title .cyan-asterisk {
+  color: #00E5FF;
+  font-family: var(--font-asterisk);
+}
+
+.showcase-desc {
+  font-size: 1rem;
+  color: #A0AEC0;
+  line-height: 1.65;
+}
+
+.showcase-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: #718096;
+  font-weight: 500;
+  margin-top: 0.5rem;
+}
+
+.showcase-hint i {
+  color: #00E5FF;
+  font-size: 1rem;
+}
+
+/* Right Column: 3D Stage & Cascading Fanned Deck (Jake Sinclair Reference) */
+.showcase-stage-wrapper {
+  position: relative;
+  width: 100%;
+  height: 640px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1500px;
+  perspective-origin: 50% 50%;
+  cursor: grab;
+  user-select: none;
+  overflow: visible;
+}
+
+.showcase-stage-wrapper:active {
+  cursor: grabbing;
+}
+
+/* 3D Fanned Container (Tilted diagonally in 3D Space) */
+.deck-fanned-3d {
+  position: relative;
+  width: 290px;
+  height: 500px;
+  transform-style: preserve-3d;
+  transform: translateX(45px) rotateZ(-22deg) rotateY(16deg) rotateX(12deg);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+/* Individual Fanned Cards with Tight Cascading Overlap */
+.fanned-card {
+  position: absolute;
+  inset: 0;
+  width: 290px;
+  height: 500px;
+  transform-style: preserve-3d;
+  will-change: transform, box-shadow, opacity, filter;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, opacity 0.35s ease, filter 0.35s ease;
+  cursor: pointer;
+}
+
+/* Base Card Positions & Layering */
+.card-item-0 {
+  transform: translate3d(-150px, -90px, -140px) rotateZ(-16deg) rotateY(8deg);
+  z-index: 10;
+  animation: fanBobbing0 7s infinite ease-in-out;
+}
+
+.card-item-1 {
+  transform: translate3d(-90px, -54px, -84px) rotateZ(-10deg) rotateY(5deg);
+  z-index: 20;
+  animation: fanBobbing1 7s infinite ease-in-out 0.6s;
+}
+
+.card-item-2 {
+  transform: translate3d(-30px, -18px, -28px) rotateZ(-4deg) rotateY(2deg);
+  z-index: 30;
+  animation: fanBobbing2 7s infinite ease-in-out 1.2s;
+}
+
+.card-item-3 {
+  transform: translate3d(30px, 18px, 28px) rotateZ(3deg) rotateY(-2deg);
+  z-index: 40;
+  animation: fanBobbing3 7s infinite ease-in-out 1.8s;
+}
+
+.card-item-4 {
+  transform: translate3d(90px, 54px, 84px) rotateZ(9deg) rotateY(-5deg);
+  z-index: 50;
+  animation: fanBobbing4 7s infinite ease-in-out 2.4s;
+}
+
+.card-item-5 {
+  transform: translate3d(150px, 90px, 140px) rotateZ(15deg) rotateY(-8deg);
+  z-index: 60;
+  animation: fanBobbing5 7s infinite ease-in-out 3s;
+}
+
+/* Organic Floating Wave Keyframes */
+@keyframes fanBobbing0 {
+  0%, 100% { transform: translate3d(-150px, -90px, -140px) rotateZ(-16deg) rotateY(8deg); }
+  50% { transform: translate3d(-150px, -102px, -125px) rotateZ(-14deg) rotateY(6deg); }
+}
+
+@keyframes fanBobbing1 {
+  0%, 100% { transform: translate3d(-90px, -54px, -84px) rotateZ(-10deg) rotateY(5deg); }
+  50% { transform: translate3d(-90px, -66px, -69px) rotateZ(-8deg) rotateY(3deg); }
+}
+
+@keyframes fanBobbing2 {
+  0%, 100% { transform: translate3d(-30px, -18px, -28px) rotateZ(-4deg) rotateY(2deg); }
+  50% { transform: translate3d(-30px, -30px, -13px) rotateZ(-2deg) rotateY(0deg); }
+}
+
+@keyframes fanBobbing3 {
+  0%, 100% { transform: translate3d(30px, 18px, 28px) rotateZ(3deg) rotateY(-2deg); }
+  50% { transform: translate3d(30px, 6px, 43px) rotateZ(5deg) rotateY(-4deg); }
+}
+
+@keyframes fanBobbing4 {
+  0%, 100% { transform: translate3d(90px, 54px, 84px) rotateZ(9deg) rotateY(-5deg); }
+  50% { transform: translate3d(90px, 42px, 99px) rotateZ(11deg) rotateY(-7deg); }
+}
+
+@keyframes fanBobbing5 {
+  0%, 100% { transform: translate3d(150px, 90px, 140px) rotateZ(15deg) rotateY(-8deg); }
+  50% { transform: translate3d(150px, 78px, 155px) rotateZ(17deg) rotateY(-10deg); }
+}
+
+/* Sleek Frameless Mobile Card Frame */
+.card-glass-frame {
+  width: 100%;
+  height: 100%;
+  border-radius: 26px;
+  overflow: hidden;
+  background: #0B0E14;
+  border: 1.5px solid rgba(255, 255, 255, 0.18);
+  box-shadow: -15px 25px 50px rgba(0, 0, 0, 0.7), 0 10px 20px rgba(0, 0, 0, 0.4);
+  position: relative;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.4s ease;
+  backface-visibility: hidden;
+  pointer-events: none;
+}
+
+.card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+}
+
+/* Floating Glass Pill Badge inside the card */
+.card-floating-badge {
+  position: absolute;
+  bottom: 14px;
+  left: 14px;
+  right: 14px;
+  padding: 8px 12px;
+  background: rgba(10, 14, 24, 0.86);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  pointer-events: none;
+}
+
+.badge-cat {
+  font-size: 0.64rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #00E5FF;
+}
+
+.badge-name {
+  font-size: 0.92rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  font-family: var(--font-heading);
+}
+
+/* Dim & push back other cards when one card is active */
+.deck-fanned-3d.has-active .fanned-card:not(.is-active) {
+  opacity: 0.18;
+  filter: brightness(0.4) contrast(0.9) blur(3px);
+  animation: none !important;
+  pointer-events: auto;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease, filter 0.35s ease;
+}
+
+.deck-fanned-3d.has-active .card-item-0:not(.is-active) { transform: translate3d(-150px, -60px, -300px) rotateZ(-16deg) rotateY(8deg) scale(0.9); }
+.deck-fanned-3d.has-active .card-item-1:not(.is-active) { transform: translate3d(-90px, -24px, -300px) rotateZ(-10deg) rotateY(5deg) scale(0.9); }
+.deck-fanned-3d.has-active .card-item-2:not(.is-active) { transform: translate3d(-30px, 12px, -300px) rotateZ(-4deg) rotateY(2deg) scale(0.9); }
+.deck-fanned-3d.has-active .card-item-3:not(.is-active) { transform: translate3d(30px, 48px, -300px) rotateZ(3deg) rotateY(-2deg) scale(0.9); }
+.deck-fanned-3d.has-active .card-item-4:not(.is-active) { transform: translate3d(90px, 84px, -300px) rotateZ(9deg) rotateY(-5deg) scale(0.9); }
+.deck-fanned-3d.has-active .card-item-5:not(.is-active) { transform: translate3d(150px, 120px, -300px) rotateZ(15deg) rotateY(-8deg) scale(0.9); }
+
+/* POP OUT TO THE FRONT: Hovered card steps completely out of the deck, floats forward facing user */
+.deck-fanned-3d .fanned-card.is-active {
+  animation: none !important;
+  opacity: 1 !important;
+  filter: none !important;
+  z-index: 9999 !important;
+  transform: translate3d(0px, -110px, 460px) rotateZ(22deg) rotateY(-16deg) rotateX(-12deg) scale(1.18) !important;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, filter 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+.deck-fanned-3d .fanned-card.is-active .card-glass-frame {
+  border-color: #00E5FF;
+  box-shadow: 0 50px 130px rgba(0, 0, 0, 0.98), 0 0 70px rgba(0, 229, 255, 0.8), 0 0 30px rgba(13, 91, 255, 0.6);
+}
+
+/* ==========================================================================
+   INFINITE MARQUEE TICKER
+   ========================================================================== */
+.showcase-marquee {
+  width: 100%;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.02);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 1.25rem 0;
+  display: flex;
+  position: relative;
+  z-index: 2;
+}
+
+.marquee-track {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+  white-space: nowrap;
+  animation: marqueeContinuous 28s linear infinite;
+  will-change: transform;
+}
+
+.showcase-marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes marqueeContinuous {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.marquee-item {
+  font-family: var(--font-heading);
+  font-size: 0.9rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: #718096;
+  transition: color 0.25s ease;
+}
+
+.marquee-item:hover {
+  color: #FFFFFF;
+}
+
+.marquee-sep {
+  font-family: var(--font-asterisk);
+  color: #0d5bff;
+  font-size: 1.2rem;
+  font-weight: 900;
+}
+
+/* ==========================================================================
+   SHOWCASE RESPONSIVENESS
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .showcase-container {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    text-align: center;
+  }
+
+  .showcase-badge {
+    align-self: center;
+  }
+
+  .showcase-desc {
+    margin: 0 auto;
+  }
+
+  .showcase-hint {
+    justify-content: center;
+  }
+
+  .showcase-stage-wrapper {
+    height: 540px;
+  }
+}
+
+@media (max-width: 640px) {
+  .section-3d-showcase {
+    padding: 4rem 0 2.5rem;
+  }
+
+  .showcase-stage-wrapper {
+    height: 440px;
+    perspective: 1000px;
+  }
+
+  .deck-fanned-3d,
+  .fanned-card {
+    width: 210px;
+    height: 370px;
+  }
+
+  .card-item-0 { transform: translate3d(-100px, -60px, -100px) rotateZ(-18deg); }
+  .card-item-1 { transform: translate3d(-60px, -36px, -60px) rotateZ(-11deg); }
+  .card-item-2 { transform: translate3d(-20px, -12px, -20px) rotateZ(-4deg); }
+  .card-item-3 { transform: translate3d(20px, 12px, 20px) rotateZ(3deg); }
+  .card-item-4 { transform: translate3d(60px, 36px, 60px) rotateZ(10deg); }
+  .card-item-5 { transform: translate3d(100px, 60px, 100px) rotateZ(17deg); }
+
+  .card-floating-badge {
+    bottom: 12px;
+    left: 12px;
+    right: 12px;
+    padding: 6px 10px;
+  }
+
+  .badge-name {
+    font-size: 0.82rem;
+  }
+}
+
