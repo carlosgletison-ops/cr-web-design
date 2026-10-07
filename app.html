@@ -1,0 +1,1568 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>CR Design — Sistema Pessoal de Organização & Gestão</title>
+  <meta name="description" content="Central de comando pessoal CR Design: rotina, tarefas, produção, finanças, vida pessoal e metas com o Ajuste Fino.">
+  <link rel="icon" type="image/png" href="minha logo/5.png">
+
+  <!-- Google Fonts: Poppins (Headings), Public Sans (Body), Montserrat (Asterisk & Branding) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@1,400;1,600&family=Montserrat:ital,wght@0,500;0,600;0,700;0,800;0,900;1,700&family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;1,600&family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+  <!-- Remix Icon -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+
+  <!-- System Stylesheet -->
+  <link rel="stylesheet" href="app.css">
+</head>
+<body class="light-theme">
+
+  <!-- ==========================================================================
+       1. TELA DE CARREGAMENTO (Com Logo Oficial da CR Design & Animação)
+       ========================================================================== -->
+  <div id="loading-screen" class="loading-screen" aria-label="Carregando Sistema CR Design">
+    <div class="loading-content">
+      <div class="loading-logo-stage">
+        <div class="logo-spin-frame" id="loading-logo-frame">
+          <img src="minha logo/1.png" alt="CR Design Logo" class="loading-official-logo" onerror="this.src='minha logo/5.png'">
+        </div>
+        <div class="loading-brand-reveal" id="loading-brand-reveal">
+          <img src="minha logo/2.png" alt="CR web design" class="loading-brand-img" onerror="this.style.display='none'">
+          <div class="brand-title">CR <span class="brand-accent">web design <span class="brand-asterisk">*</span></span></div>
+          <p class="brand-subtitle">SISTEMA PESSOAL DE GESTÃO</p>
+        </div>
+      </div>
+      <div class="loading-progress-bar">
+        <div class="loading-progress-fill" id="loading-fill"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Subtle Ambient Grid Background -->
+  <div class="bg-grid-overlay" aria-hidden="true"></div>
+
+  <!-- APP SHELL WRAPPER -->
+  <div class="app-layout" id="app-layout">
+
+    <!-- ==========================================================================
+         SIDEBAR LATERAL (Desktop & Tablet)
+         ========================================================================== -->
+    <aside class="app-sidebar" id="app-sidebar">
+      <!-- Sidebar Brand com Logo Oficial -->
+      <div class="sidebar-header">
+        <a href="#dashboard" class="sidebar-brand" onclick="app.navigate('dashboard'); return false;">
+          <div class="brand-icon-logo">
+            <img src="minha logo/5.png" alt="CR Design" class="brand-logo-img">
+          </div>
+          <div class="brand-text">
+            <span class="brand-name">CR Design</span>
+            <span class="brand-badge">PRO v2.0</span>
+          </div>
+        </a>
+      </div>
+
+      <!-- Quick Action Button in Sidebar -->
+      <div class="sidebar-quick-action">
+        <button class="btn-primary-action" onclick="app.openQuickAddModal()">
+          <i class="ri-add-line"></i>
+          <span>Novo Registro</span>
+          <span class="btn-asterisk">*</span>
+        </button>
+      </div>
+
+      <!-- Main Navigation Menu -->
+      <nav class="sidebar-nav">
+        <div class="nav-section-label">PRINCIPAL</div>
+        <ul class="sidebar-menu">
+          <li>
+            <button class="nav-item active" data-tab="dashboard" onclick="app.navigate('dashboard')">
+              <i class="ri-dashboard-3-line"></i>
+              <span>Dashboard</span>
+              <span class="nav-indicator"></span>
+            </button>
+          </li>
+          <li>
+            <button class="nav-item" data-tab="tarefas" onclick="app.navigate('tarefas')">
+              <i class="ri-checkbox-circle-line"></i>
+              <span>Tarefas</span>
+              <span class="nav-badge" id="badge-tarefas-count">0</span>
+            </button>
+          </li>
+          <li>
+            <button class="nav-item" data-tab="producao" onclick="app.navigate('producao')">
+              <i class="ri-layout-masonry-line"></i>
+              <span>Minha Produção</span>
+              <span class="nav-badge accent" id="badge-producao-count">0</span>
+            </button>
+          </li>
+          <li>
+            <button class="nav-item" data-tab="financas" onclick="app.navigate('financas')">
+              <i class="ri-wallet-3-line"></i>
+              <span>Finanças</span>
+            </button>
+          </li>
+        </ul>
+
+        <div class="nav-section-label">ORGANIZAÇÃO</div>
+        <ul class="sidebar-menu">
+          <li>
+            <button class="nav-item" data-tab="pessoal" onclick="app.navigate('pessoal')">
+              <i class="ri-user-smile-line"></i>
+              <span>Pessoal</span>
+            </button>
+          </li>
+          <li>
+            <button class="nav-item" data-tab="metas" onclick="app.navigate('metas')">
+              <i class="ri-flag-2-line"></i>
+              <span>Metas</span>
+              <span class="nav-badge" id="badge-metas-count">0</span>
+            </button>
+          </li>
+          <li>
+            <button class="nav-item" data-tab="calendario" onclick="app.navigate('calendario')">
+              <i class="ri-calendar-event-line"></i>
+              <span>Calendário</span>
+            </button>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Sidebar Footer User Profile -->
+      <div class="sidebar-footer">
+        <div class="user-card" onclick="app.openSettingsModal()" title="Configurações e Dados">
+          <div class="user-avatar">
+            <span>CG</span>
+            <div class="status-dot"></div>
+          </div>
+          <div class="user-info">
+            <span class="user-name">Carlos Gletison</span>
+            <span class="user-role">Web Designer <span class="role-star">*</span></span>
+          </div>
+          <button class="btn-icon-subtle" aria-label="Configurações">
+            <i class="ri-settings-4-line"></i>
+          </button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ==========================================================================
+         MAIN CONTENT WRAPPER
+         ========================================================================== -->
+    <div class="app-main-wrapper">
+
+      <!-- TOPBAR / HEADER (Mobile & Desktop) -->
+      <header class="app-topbar">
+        <!-- Mobile Brand & Toggle -->
+        <div class="topbar-left">
+          <div class="mobile-brand-wrap" onclick="app.navigate('dashboard')">
+            <img src="minha logo/5.png" alt="CR Design" class="mobile-brand-img">
+            <div class="mobile-brand-title">CR Design</div>
+          </div>
+          <!-- Clean Blue Header Date in Poppins -->
+          <div class="desktop-date-clean" id="header-datetime-text">
+            Quarta-feira, 7 de Outubro
+          </div>
+        </div>
+
+        <!-- Topbar Actions -->
+        <div class="topbar-right">
+          <!-- Clean Summary Text (No Pill) -->
+          <div class="topbar-summary-clean" id="topbar-summary-text">
+            0 tarefas hoje • 0 em produção
+          </div>
+
+          <!-- Notification Trigger Button -->
+          <button class="btn-topbar-icon" id="btn-topbar-notif" onclick="app.handleNotificationClick()" title="Notificações do Sistema">
+            <i class="ri-notification-3-line" id="icon-topbar-notif"></i>
+            <span class="notif-badge-pulse" id="notif-badge-pulse" style="display:none;"></span>
+          </button>
+
+          <!-- Quick Add Button -->
+          <button class="btn-topbar-quick" onclick="app.openQuickAddModal()" title="Adicionar Rápido">
+            <i class="ri-add-line"></i>
+            <span class="hide-mobile">Criar</span>
+            <span class="btn-asterisk hide-mobile">*</span>
+          </button>
+
+          <!-- Settings Button -->
+          <button class="btn-topbar-icon" onclick="app.openSettingsModal()" title="Configurações & Backup">
+            <i class="ri-settings-4-line"></i>
+          </button>
+        </div>
+      </header>
+
+      <!-- VIEW CONTAINER (Dynamic Active Tab) -->
+      <main class="app-view-container" id="app-view-container">
+
+        <!-- ====================================================================
+             VIEW: DASHBOARD (Centro de Comando)
+             ==================================================================== -->
+        <section class="app-tab-view active" id="view-dashboard">
+          
+          <!-- Notification Permission Banner (Mobile & Desktop Prompt) -->
+          <div class="notif-permission-banner" id="notif-permission-banner" style="display:none;">
+            <div class="notif-banner-left">
+              <div class="notif-banner-icon">
+                <i class="ri-notification-3-fill"></i>
+              </div>
+              <div class="notif-banner-content">
+                <h4>Ativar Notificações do Sistema <span class="cyan-asterisk">*</span></h4>
+                <p>Receba lembretes nativos de tarefas do dia, prazos de entregas e compromissos no seu celular ou computador.</p>
+              </div>
+            </div>
+            <div class="notif-banner-actions">
+              <button class="btn-notif-grant" onclick="app.requestNotificationPermission()">
+                <i class="ri-check-line"></i> Ativar Notificações
+              </button>
+              <button class="btn-notif-close" onclick="app.dismissNotifBanner()" title="Dispensar">
+                <i class="ri-close-line"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Top Greeting & Overview Hero Banner -->
+          <div class="dashboard-hero-banner">
+            <div class="greeting-content">
+              <h1 class="greeting-title" id="greeting-title">
+                Bom dia, <span class="highlight-blue">Carlos <span class="cyan-asterisk">*</span></span>
+              </h1>
+              <p class="greeting-subtitle" id="greeting-subtitle">
+                Aqui está o panorama completo da sua rotina, finanças e produção hoje.
+              </p>
+            </div>
+
+            <!-- 4 Quick Key Metric Stat Cards -->
+            <div class="hero-stats-grid">
+              <div class="stat-card" onclick="app.navigate('tarefas')">
+                <div class="stat-icon stat-blue"><i class="ri-checkbox-circle-line"></i></div>
+                <div class="stat-data">
+                  <span class="stat-label">Tarefas de Hoje</span>
+                  <div class="stat-value-group">
+                    <span class="stat-value" id="dash-stat-tasks-today">0</span>
+                    <span class="stat-sub" id="dash-stat-tasks-pending">0 pendentes</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="stat-card" onclick="app.navigate('financas')">
+                <div class="stat-icon stat-emerald"><i class="ri-wallet-3-line"></i></div>
+                <div class="stat-data">
+                  <span class="stat-label">Saldo Disponível</span>
+                  <div class="stat-value-group">
+                    <span class="stat-value" id="dash-stat-fin-balance">R$ 0</span>
+                    <span class="stat-sub text-emerald" id="dash-stat-fin-income">Rec: R$ 0</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="stat-card" onclick="app.navigate('producao')">
+                <div class="stat-icon stat-indigo"><i class="ri-layout-masonry-line"></i></div>
+                <div class="stat-data">
+                  <span class="stat-label">Produção do Mês</span>
+                  <div class="stat-value-group">
+                    <span class="stat-value" id="dash-stat-prod-count">0</span>
+                    <span class="stat-sub" id="dash-stat-prod-active">0 em andamento</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="stat-card" onclick="app.navigate('metas')">
+                <div class="stat-icon stat-amber"><i class="ri-flag-2-line"></i></div>
+                <div class="stat-data">
+                  <span class="stat-label">Metas em Foco</span>
+                  <div class="stat-value-group">
+                    <span class="stat-value" id="dash-stat-metas-active">0</span>
+                    <span class="stat-sub text-amber" id="dash-stat-metas-avg">0% concluído</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- DASHBOARD MAIN 2-COLUMN GRID -->
+          <div class="dashboard-grid">
+
+            <!-- LEFT COLUMN (Tarefas de Hoje + Semana + Metas) -->
+            <div class="dash-col dash-col-primary">
+
+              <!-- BLOCO: MINHAS TAREFAS DE HOJE -->
+              <div class="dash-card card-tasks">
+                <div class="dash-card-header">
+                  <div class="card-header-title">
+                    <i class="ri-checkbox-circle-fill text-blue"></i>
+                    <h2>Minhas Tarefas Hoje</h2>
+                    <span class="count-pill" id="dash-today-tasks-pill">0</span>
+                  </div>
+                  <div class="card-header-actions">
+                    <button class="btn-card-action" onclick="app.openTaskModal()">
+                      <i class="ri-add-line"></i>
+                      <span>Nova Tarefa</span>
+                    </button>
+                  </div>
+                </div>
+                <div class="dash-card-body">
+                  <div class="tasks-mini-list" id="dash-today-tasks-list">
+                    <!-- Populated via JS -->
+                  </div>
+                </div>
+                <div class="dash-card-footer">
+                  <button class="btn-link-view-all" onclick="app.navigate('tarefas')">
+                    <span>Ver todas as tarefas</span>
+                    <i class="ri-arrow-right-line"></i>
+                  </button>
+                </div>
+              </div>
+
+              <!-- BLOCO: SEMANA (Calendário Semanal Compacto) -->
+              <div class="dash-card card-week">
+                <div class="dash-card-header">
+                  <div class="card-header-title">
+                    <i class="ri-calendar-check-line text-blue"></i>
+                    <h2>Semana Atual</h2>
+                    <span class="subtitle-pill" id="dash-week-range">Outubro</span>
+                  </div>
+                  <div class="card-header-actions">
+                    <button class="btn-card-action-subtle" onclick="app.navigate('calendario')">
+                      <span>Ver Calendário</span>
+                      <i class="ri-arrow-right-up-line"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="dash-card-body">
+                  <div class="week-strip-container" id="dash-week-strip">
+                    <!-- Populated dynamically via JS: Seg a Dom -->
+                  </div>
+                  <div class="week-selected-day-details" id="dash-week-day-details">
+                    <!-- Shows events of selected day -->
+                  </div>
+                </div>
+              </div>
+
+              <!-- BLOCO: METAS -->
+              <div class="dash-card card-metas">
+                <div class="dash-card-header">
+                  <div class="card-header-title">
+                    <i class="ri-flag-2-fill text-amber"></i>
+                    <h2>Metas Principais</h2>
+                  </div>
+                  <div class="card-header-actions">
+                    <button class="btn-card-action" onclick="app.openMetaModal()">
+                      <i class="ri-add-line"></i>
+                      <span>Nova Meta</span>
+                    </button>
+                  </div>
+                </div>
+                <div class="dash-card-body">
+                  <div class="metas-mini-list" id="dash-metas-list">
+                    <!-- Populated via JS -->
+                  </div>
+                </div>
+                <div class="dash-card-footer">
+                  <button class="btn-link-view-all" onclick="app.navigate('metas')">
+                    <span>Acessar painel de metas</span>
+                    <i class="ri-arrow-right-line"></i>
+                  </button>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- RIGHT COLUMN (Finanças + Produção + Pessoal) -->
+            <div class="dash-col dash-col-secondary">
+
+              <!-- BLOCO: FINANCEIRO -->
+              <div class="dash-card card-finance">
+                <div class="dash-card-header">
+                  <div class="card-header-title">
+                    <i class="ri-money-dollar-circle-fill text-emerald"></i>
+                    <h2>Resumo Financeiro</h2>
+                    <span class="badge-month" id="dash-fin-month-badge">Outubro</span>
+                  </div>
+                  <div class="card-header-actions">
+                    <button class="btn-card-action" onclick="app.openFinanceTransactionModal()">
+                      <i class="ri-add-line"></i>
+                      <span>Lançar</span>
+                    </button>
+                  </div>
+                </div>
+                <div class="dash-card-body">
+                  <!-- Values Grid -->
+                  <div class="fin-values-summary">
+                    <div class="fin-row-item">
+                      <span class="fin-label">Receita do Mês</span>
+                      <span class="fin-val text-emerald" id="dash-fin-income">R$ 0,00</span>
+                    </div>
+                    <div class="fin-row-item">
+                      <span class="fin-label">Total Gasto</span>
+                      <span class="fin-val text-rose" id="dash-fin-expense">R$ 0,00</span>
+                    </div>
+                    <div class="fin-row-item">
+                      <span class="fin-label">Separado / Planejado</span>
+                      <span class="fin-val text-amber" id="dash-fin-planned">R$ 0,00</span>
+                    </div>
+                    <div class="fin-row-item">
+                      <span class="fin-label">Reserva Guardada</span>
+                      <span class="fin-val text-indigo" id="dash-fin-reserved">R$ 0,00</span>
+                    </div>
+                    <div class="fin-row-item highlight-balance">
+                      <span class="fin-label">Saldo Livre Disponível</span>
+                      <span class="fin-val text-blue" id="dash-fin-available">R$ 0,00</span>
+                    </div>
+                  </div>
+
+                  <!-- Visual Distribution of Money -->
+                  <div class="fin-distribution-section">
+                    <div class="distrib-header">
+                      <span class="distrib-title">Divisão do Orçamento</span>
+                      <button class="btn-micro-edit" onclick="app.navigate('financas')" title="Editar categorias">
+                        <i class="ri-edit-line"></i> Ajustar Divisão
+                      </button>
+                    </div>
+                    
+                    <!-- Progress Multi-bar -->
+                    <div class="budget-stacked-bar" id="dash-budget-stacked-bar">
+                      <!-- Rendered via JS -->
+                    </div>
+
+                    <!-- Category Pills List -->
+                    <div class="budget-category-chips" id="dash-budget-category-chips">
+                      <!-- Rendered via JS -->
+                    </div>
+                  </div>
+                </div>
+                <div class="dash-card-footer">
+                  <button class="btn-link-view-all" onclick="app.navigate('financas')">
+                    <span>Gerenciar finanças completas</span>
+                    <i class="ri-arrow-right-line"></i>
+                  </button>
+                </div>
+              </div>
+
+              <!-- BLOCO: MINHA PRODUÇÃO -->
+              <div class="dash-card card-production">
+                <div class="dash-card-header">
+                  <div class="card-header-title">
+                    <i class="ri-briefcase-4-fill text-blue"></i>
+                    <h2>Minha Produção</h2>
+                    <span class="badge-month" id="dash-prod-month-badge">Outubro</span>
+                  </div>
+                  <div class="card-header-actions">
+                    <button class="btn-card-action" onclick="app.openProjectModal()">
+                      <i class="ri-add-line"></i>
+                      <span>Novo Projeto</span>
+                    </button>
+                  </div>
+                </div>
+                <div class="dash-card-body">
+                  <!-- Production Metric Pills -->
+                  <div class="prod-pills-row">
+                    <div class="prod-pill">
+                      <span class="prod-pill-num text-emerald" id="dash-prod-done-num">0</span>
+                      <span class="prod-pill-lbl">Concluídos</span>
+                    </div>
+                    <div class="prod-pill">
+                      <span class="prod-pill-num text-blue" id="dash-prod-running-num">0</span>
+                      <span class="prod-pill-lbl">Em andamento</span>
+                    </div>
+                    <div class="prod-pill">
+                      <span class="prod-pill-num text-amber" id="dash-prod-pending-num">0</span>
+                      <span class="prod-pill-lbl">Pendências</span>
+                    </div>
+                  </div>
+
+                  <!-- Active Production Projects Mini List -->
+                  <div class="production-mini-list" id="dash-production-list">
+                    <!-- Populated via JS -->
+                  </div>
+                </div>
+                <div class="dash-card-footer">
+                  <button class="btn-link-view-all" onclick="app.navigate('producao')">
+                    <span>Acessar área de produção</span>
+                    <i class="ri-arrow-right-line"></i>
+                  </button>
+                </div>
+              </div>
+
+              <!-- BLOCO: PESSOAL -->
+              <div class="dash-card card-personal">
+                <div class="dash-card-header">
+                  <div class="card-header-title">
+                    <i class="ri-user-smile-fill text-blue"></i>
+                    <h2>Resumo Pessoal</h2>
+                  </div>
+                  <div class="card-header-actions">
+                    <button class="btn-card-action" onclick="app.openPersonalModal()">
+                      <i class="ri-add-line"></i>
+                      <span>Novo Item</span>
+                    </button>
+                  </div>
+                </div>
+                <div class="dash-card-body">
+                  <div class="personal-mini-list" id="dash-personal-list">
+                    <!-- Populated via JS -->
+                  </div>
+                </div>
+                <div class="dash-card-footer">
+                  <button class="btn-link-view-all" onclick="app.navigate('pessoal')">
+                    <span>Abrir área pessoal completa</span>
+                    <i class="ri-arrow-right-line"></i>
+                  </button>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ====================================================================
+             VIEW: TAREFAS (Organização Completa da Rotina)
+             ==================================================================== -->
+        <section class="app-tab-view" id="view-tarefas">
+          <div class="view-header-bar">
+            <div>
+              <h1 class="view-title">Rotina & <span class="highlight-blue">Tarefas <span class="cyan-asterisk">*</span></span></h1>
+              <p class="view-desc">Organize o dia a dia, filtre por prioridade, data e projeto com zero atrito.</p>
+            </div>
+            <div class="view-header-actions">
+              <button class="btn-primary-action" onclick="app.openTaskModal()">
+                <i class="ri-add-line"></i>
+                <span>+ Nova Tarefa</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Filter Nav Tabs & Search Bar -->
+          <div class="filter-controls-row">
+            <div class="filter-pills-group" id="task-filter-pills">
+              <button class="filter-pill active" data-filter="hoje" onclick="app.setTaskFilter('hoje')">Hoje <span class="pill-badge" id="pill-count-hoje">0</span></button>
+              <button class="filter-pill" data-filter="proximas" onclick="app.setTaskFilter('proximas')">Próximas <span class="pill-badge" id="pill-count-proximas">0</span></button>
+              <button class="filter-pill" data-filter="atrasadas" onclick="app.setTaskFilter('atrasadas')">Atrasadas <span class="pill-badge rose" id="pill-count-atrasadas">0</span></button>
+              <button class="filter-pill" data-filter="concluidas" onclick="app.setTaskFilter('concluidas')">Concluídas <span class="pill-badge emerald" id="pill-count-concluidas">0</span></button>
+              <button class="filter-pill" data-filter="todas" onclick="app.setTaskFilter('todas')">Todas <span class="pill-badge" id="pill-count-todas">0</span></button>
+            </div>
+
+            <div class="filter-search-box">
+              <i class="ri-search-line"></i>
+              <input type="text" id="task-search-input" placeholder="Buscar tarefas..." oninput="app.renderTasks()">
+            </div>
+          </div>
+
+          <!-- Secondary Filters Row (Priority & Category) -->
+          <div class="secondary-filters-row">
+            <div class="select-filter-wrap">
+              <label><i class="ri-filter-3-line"></i> Prioridade:</label>
+              <select id="task-filter-priority" onchange="app.renderTasks()">
+                <option value="all">Todas as prioridades</option>
+                <option value="alta">Alta</option>
+                <option value="media">Média</option>
+                <option value="baixa">Baixa</option>
+              </select>
+            </div>
+
+            <div class="select-filter-wrap">
+              <label><i class="ri-folder-line"></i> Categoria:</label>
+              <select id="task-filter-category" onchange="app.renderTasks()">
+                <option value="all">Todas as categorias</option>
+                <option value="CR Design">CR Design</option>
+                <option value="Web Design">Web Design</option>
+                <option value="Clientes">Clientes</option>
+                <option value="Pessoal">Pessoal</option>
+                <option value="Financeiro">Financeiro</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Tasks Main List Container -->
+          <div class="tasks-full-container" id="tasks-full-list">
+            <!-- Populated via JS -->
+          </div>
+        </section>
+
+        <!-- ====================================================================
+             VIEW: PRODUÇÃO (Projetos & Acompanhamento — TELA NO AZUL CHAPADO)
+             ==================================================================== -->
+        <section class="app-tab-view view-blue-solid" id="view-producao">
+          <div class="view-header-bar">
+            <div>
+              <h1 class="view-title text-white-head">Minha Produção <span class="white-asterisk">*</span></h1>
+              <p class="view-desc text-white-sub">Acompanhe projetos, clientes, prazos, entregas e a métrica de produtividade mensal.</p>
+            </div>
+            <div class="view-header-actions">
+              <button class="btn-white-solid-action" onclick="app.openProjectModal()">
+                <i class="ri-add-line"></i>
+                <span>+ Novo Projeto</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Automatic Performance Metrics Cards -->
+          <div class="prod-metrics-grid">
+            <div class="metric-card">
+              <div class="metric-header">
+                <span class="metric-title">Produção do Mês</span>
+                <i class="ri-calendar-line text-blue"></i>
+              </div>
+              <div class="metric-value-huge text-blue" id="prod-metric-month-total">0</div>
+              <div class="metric-sub" id="prod-metric-month-sub">Projetos ativos ou finalizados</div>
+            </div>
+
+            <div class="metric-card">
+              <div class="metric-header">
+                <span class="metric-title">Projetos Concluídos</span>
+                <i class="ri-checkbox-circle-line text-emerald"></i>
+              </div>
+              <div class="metric-value-huge text-emerald" id="prod-metric-completed">0</div>
+              <div class="metric-sub" id="prod-metric-completed-rate">Taxa de sucesso: 100%</div>
+            </div>
+
+            <div class="metric-card">
+              <div class="metric-header">
+                <span class="metric-title">Em Andamento</span>
+                <i class="ri-time-line text-blue"></i>
+              </div>
+              <div class="metric-value-huge text-blue" id="prod-metric-running">0</div>
+              <div class="metric-sub" id="prod-metric-running-sub">Entregas no cronograma</div>
+            </div>
+
+            <div class="metric-card">
+              <div class="metric-header">
+                <span class="metric-title">Pendências / Revisão</span>
+                <i class="ri-alert-line text-amber"></i>
+              </div>
+              <div class="metric-value-huge text-amber" id="prod-metric-pending">0</div>
+              <div class="metric-sub">Itens aguardando aprovação</div>
+            </div>
+          </div>
+
+          <!-- Filter & View Controls -->
+          <div class="filter-controls-row">
+            <div class="filter-pills-group" id="prod-filter-pills">
+              <button class="filter-pill active" data-filter="all" onclick="app.setProdFilter('all')">Todos</button>
+              <button class="filter-pill" data-filter="andamento" onclick="app.setProdFilter('andamento')">Em Andamento</button>
+              <button class="filter-pill" data-filter="revisao" onclick="app.setProdFilter('revisao')">Revisão</button>
+              <button class="filter-pill" data-filter="concluido" onclick="app.setProdFilter('concluido')">Concluídos</button>
+            </div>
+
+            <div class="filter-search-box">
+              <i class="ri-search-line"></i>
+              <input type="text" id="prod-search-input" placeholder="Buscar por projeto, cliente ou tipo..." oninput="app.renderProjects()">
+            </div>
+          </div>
+
+          <!-- Projects Grid -->
+          <div class="projects-cards-grid" id="projects-grid">
+            <!-- Populated via JS -->
+          </div>
+        </section>
+
+        <!-- ====================================================================
+             VIEW: FINANÇAS (Controle Financeiro 100% Editável & Divisão de Orçamento)
+             ==================================================================== -->
+        <section class="app-tab-view" id="view-financas">
+          <div class="view-header-bar">
+            <div>
+              <h1 class="view-title">Controle <span class="highlight-blue">Financeiro <span class="cyan-asterisk">*</span></span></h1>
+              <p class="view-desc">Receitas, despesas, planejamento por categorias e divisão do dinheiro 100% editáveis.</p>
+            </div>
+            <div class="view-header-actions">
+              <button class="btn-secondary-action" onclick="app.openBudgetPlanningModal()">
+                <i class="ri-pie-chart-2-line"></i>
+                <span>Editar Planejamento</span>
+              </button>
+              <button class="btn-primary-action" onclick="app.openFinanceTransactionModal()">
+                <i class="ri-add-line"></i>
+                <span>+ Novo Lançamento</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Financial Balance Dashboard Banner -->
+          <div class="fin-overview-cards-grid">
+            <div class="fin-stat-card fin-card-income">
+              <div class="fin-card-top">
+                <span>Receitas do Mês</span>
+                <i class="ri-arrow-up-circle-line text-emerald"></i>
+              </div>
+              <div class="fin-card-val text-emerald" id="fin-total-income">R$ 0,00</div>
+              <div class="fin-card-sub" id="fin-income-details">Salário, Freelances & Extras</div>
+            </div>
+
+            <div class="fin-stat-card fin-card-expense">
+              <div class="fin-card-top">
+                <span>Despesas Realizadas</span>
+                <i class="ri-arrow-down-circle-line text-rose"></i>
+              </div>
+              <div class="fin-card-val text-rose" id="fin-total-expense">R$ 0,00</div>
+              <div class="fin-card-sub" id="fin-expense-details">Gastos registrados</div>
+            </div>
+
+            <div class="fin-stat-card fin-card-planned">
+              <div class="fin-card-top">
+                <span>Total Planejado / Separado</span>
+                <i class="ri-bookmark-3-line text-amber"></i>
+              </div>
+              <div class="fin-card-val text-amber" id="fin-total-planned">R$ 0,00</div>
+              <div class="fin-card-sub">Orçado nas categorias</div>
+            </div>
+
+            <div class="fin-stat-card fin-card-reserved">
+              <div class="fin-card-top">
+                <span>Total Reservado</span>
+                <i class="ri-safe-2-line text-indigo"></i>
+              </div>
+              <div class="fin-card-val text-indigo" id="fin-total-reserved">R$ 0,00</div>
+              <div class="fin-card-sub">Investimentos & Reserva</div>
+            </div>
+
+            <div class="fin-stat-card fin-card-available">
+              <div class="fin-card-top">
+                <span>Saldo Livre Disponível</span>
+                <i class="ri-funds-box-line text-blue"></i>
+              </div>
+              <div class="fin-card-val text-blue" id="fin-total-available">R$ 0,00</div>
+              <div class="fin-card-sub">Disponível para uso</div>
+            </div>
+          </div>
+
+          <!-- 2 COLUMNS: ORÇAMENTO / PLANEJAMENTO vs HISTÓRICO DE TRANSAÇÕES -->
+          <div class="fin-main-grid">
+
+            <!-- Coluna 1: Planejamento & Divisão do Dinheiro -->
+            <div class="fin-col">
+              <div class="dash-card">
+                <div class="dash-card-header">
+                  <div class="card-header-title">
+                    <i class="ri-donut-chart-fill text-blue"></i>
+                    <h2>Divisão do Dinheiro & Orçamento</h2>
+                  </div>
+                  <button class="btn-card-action" onclick="app.openBudgetPlanningModal()">
+                    <i class="ri-edit-line"></i>
+                    <span>Configurar Valores</span>
+                  </button>
+                </div>
+                <div class="dash-card-body">
+                  <p class="text-subtle-hint">
+                    Defina exatamente quanto separar para cada área. Os saldos e percentuais recalculam em tempo real.
+                  </p>
+                  
+                  <div class="budget-items-list" id="fin-budget-categories-list">
+                    <!-- Populated via JS -->
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Coluna 2: Transações Recentes (Receitas e Despesas) -->
+            <div class="fin-col">
+              <div class="dash-card">
+                <div class="dash-card-header">
+                  <div class="card-header-title">
+                    <i class="ri-exchange-dollar-line text-blue"></i>
+                    <h2>Extrato de Lançamentos</h2>
+                    <span class="count-pill" id="fin-transactions-count">0</span>
+                  </div>
+                  <div class="filter-mini-wrap">
+                    <select id="fin-filter-type" onchange="app.renderFinances()">
+                      <option value="all">Todos</option>
+                      <option value="receita">Receitas</option>
+                      <option value="despesa">Despesas</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="dash-card-body">
+                  <div class="transactions-list" id="fin-transactions-list">
+                    <!-- Populated via JS -->
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ====================================================================
+             VIEW: PESSOAL (Compromissos, Lembretes & Notas — TELA NO AZUL CHAPADO)
+             ==================================================================== -->
+        <section class="app-tab-view view-blue-solid" id="view-pessoal">
+          <div class="view-header-bar">
+            <div>
+              <h1 class="view-title text-white-head">Área Pessoal <span class="white-asterisk">*</span></h1>
+              <p class="view-desc text-white-sub">Compromissos, eventos, anotações rápidas, pendências e informações importantes.</p>
+            </div>
+            <div class="view-header-actions">
+              <button class="btn-white-solid-action" onclick="app.openPersonalModal()">
+                <i class="ri-add-line"></i>
+                <span>+ Novo Registro</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="personal-grid">
+            <!-- Coluna 1: Compromissos & Eventos Pessoais -->
+            <div class="personal-col">
+              <div class="dash-card">
+                <div class="dash-card-header">
+                  <div class="card-header-title">
+                    <i class="ri-calendar-todo-fill text-blue"></i>
+                    <h2>Compromissos & Eventos</h2>
+                  </div>
+                  <button class="btn-card-action-subtle" onclick="app.openPersonalModal('evento')">
+                    <i class="ri-add-line"></i> Adicionar
+                  </button>
+                </div>
+                <div class="dash-card-body">
+                  <div class="personal-items-container" id="personal-events-list">
+                    <!-- Populated via JS -->
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Coluna 2: Anotações & Ideias Rápidas -->
+            <div class="personal-col">
+              <div class="dash-card">
+                <div class="dash-card-header">
+                  <div class="card-header-title">
+                    <i class="ri-sticky-note-line text-amber"></i>
+                    <h2>Anotações & Lembretes</h2>
+                  </div>
+                  <button class="btn-card-action-subtle" onclick="app.openPersonalModal('nota')">
+                    <i class="ri-add-line"></i> Nova Nota
+                  </button>
+                </div>
+                <div class="dash-card-body">
+                  <!-- Quick Scratchpad -->
+                  <div class="scratchpad-box">
+                    <div class="scratchpad-head">
+                      <span><i class="ri-flashlight-fill"></i> Bloco Rápido (Auto-salvo)</span>
+                    </div>
+                    <textarea id="quick-scratchpad" placeholder="Digite ideias, lembretes instantâneos ou notas rápidas..." oninput="app.saveScratchpad()"></textarea>
+                  </div>
+
+                  <div class="notes-cards-container" id="personal-notes-list">
+                    <!-- Populated via JS -->
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Coluna 3: Informações & Links Importantes -->
+            <div class="personal-col">
+              <div class="dash-card">
+                <div class="dash-card-header">
+                  <div class="card-header-title">
+                    <i class="ri-information-line text-emerald"></i>
+                    <h2>Informações & Referências</h2>
+                  </div>
+                  <button class="btn-card-action-subtle" onclick="app.openPersonalModal('info')">
+                    <i class="ri-add-line"></i> Guardar Info
+                  </button>
+                </div>
+                <div class="dash-card-body">
+                  <div class="info-cards-container" id="personal-info-list">
+                    <!-- Populated via JS -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ====================================================================
+             VIEW: METAS (Objetivos, Prazos & Acompanhamento)
+             ==================================================================== -->
+        <section class="app-tab-view" id="view-metas">
+          <div class="view-header-bar">
+            <div>
+              <h1 class="view-title">Minhas <span class="highlight-blue">Metas <span class="cyan-asterisk">*</span></span></h1>
+              <p class="view-desc">Acompanhe seus objetivos por categoria com barras de progresso, prazos e contagem regressiva.</p>
+            </div>
+            <div class="view-header-actions">
+              <button class="btn-primary-action" onclick="app.openMetaModal()">
+                <i class="ri-add-line"></i>
+                <span>+ Nova Meta</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Metas Filter Pills -->
+          <div class="filter-controls-row">
+            <div class="filter-pills-group" id="metas-filter-pills">
+              <button class="filter-pill active" data-filter="all" onclick="app.setMetaFilter('all')">Todas</button>
+              <button class="filter-pill" data-filter="Financeiro" onclick="app.setMetaFilter('Financeiro')">Financeiro</button>
+              <button class="filter-pill" data-filter="Profissional" onclick="app.setMetaFilter('Profissional')">Profissional</button>
+              <button class="filter-pill" data-filter="CR Design" onclick="app.setMetaFilter('CR Design')">CR Design</button>
+              <button class="filter-pill" data-filter="Pessoal" onclick="app.setMetaFilter('Pessoal')">Pessoal</button>
+            </div>
+          </div>
+
+          <!-- Metas Grid -->
+          <div class="metas-cards-grid" id="metas-full-grid">
+            <!-- Populated via JS -->
+          </div>
+        </section>
+
+        <!-- ====================================================================
+             VIEW: CALENDÁRIO (Agenda Integrada Mês / Semana / Dia)
+             ==================================================================== -->
+        <section class="app-tab-view" id="view-calendario">
+          <div class="view-header-bar">
+            <div>
+              <h1 class="view-title">Meu <span class="highlight-blue">Calendário <span class="cyan-asterisk">*</span></span></h1>
+              <p class="view-desc">Visão unificada de tarefas, compromissos pessoais, prazos de entrega e metas.</p>
+            </div>
+            <div class="view-header-actions">
+              <div class="cal-view-modes">
+                <button class="cal-mode-btn active" data-mode="month" onclick="app.setCalMode('month')">Mês</button>
+                <button class="cal-mode-btn" data-mode="week" onclick="app.setCalMode('week')">Semana</button>
+                <button class="cal-mode-btn" data-mode="day" onclick="app.setCalMode('day')">Dia</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Calendar Navigator Bar -->
+          <div class="cal-nav-bar">
+            <div class="cal-nav-left">
+              <button class="btn-cal-nav" onclick="app.calPrev()"><i class="ri-arrow-left-s-line"></i></button>
+              <button class="btn-cal-today" onclick="app.calToday()">Hoje</button>
+              <button class="btn-cal-nav" onclick="app.calNext()"><i class="ri-arrow-right-s-line"></i></button>
+              <h2 class="cal-current-label" id="cal-current-label">Outubro de 2026</h2>
+            </div>
+            <div class="cal-legend">
+              <span class="legend-item"><span class="dot-task"></span> Tarefa</span>
+              <span class="legend-item"><span class="dot-project"></span> Entrega</span>
+              <span class="legend-item"><span class="dot-personal"></span> Pessoal</span>
+            </div>
+          </div>
+
+          <!-- Calendar Display Area -->
+          <div class="calendar-display-container" id="calendar-display-container">
+            <!-- Month / Week / Day Rendered via JS -->
+          </div>
+        </section>
+
+      </main>
+    </div>
+
+    <!-- ==========================================================================
+         MOBILE BOTTOM NAVIGATION BAR (Mobile-first Navigation)
+         ========================================================================== -->
+    <nav class="mobile-bottom-nav" id="mobile-bottom-nav">
+      <button class="mobile-nav-item active" data-tab="dashboard" onclick="app.navigate('dashboard')">
+        <i class="ri-dashboard-3-line"></i>
+        <span>Início</span>
+      </button>
+
+      <button class="mobile-nav-item" data-tab="tarefas" onclick="app.navigate('tarefas')">
+        <div class="mobile-icon-wrap">
+          <i class="ri-checkbox-circle-line"></i>
+          <span class="mobile-badge" id="mobile-badge-tasks" style="display:none;">0</span>
+        </div>
+        <span>Tarefas</span>
+      </button>
+
+      <!-- Central Quick Add Button -->
+      <button class="mobile-nav-action-center" onclick="app.openQuickAddModal()" aria-label="Adicionar">
+        <div class="center-btn-inner">
+          <i class="ri-add-line"></i>
+        </div>
+      </button>
+
+      <button class="mobile-nav-item" data-tab="producao" onclick="app.navigate('producao')">
+        <i class="ri-layout-masonry-line"></i>
+        <span>Produção</span>
+      </button>
+
+      <button class="mobile-nav-item" data-tab="financas" onclick="app.navigate('financas')">
+        <i class="ri-wallet-3-line"></i>
+        <span>Finanças</span>
+      </button>
+
+      <button class="mobile-nav-item" id="btn-mobile-more" onclick="app.toggleMobileMoreSheet()">
+        <i class="ri-more-fill"></i>
+        <span>Mais</span>
+      </button>
+    </nav>
+
+    <!-- MOBILE "MAIS" BOTTOM SHEET DRAWER -->
+    <div class="bottom-sheet-backdrop" id="more-sheet-backdrop" onclick="app.toggleMobileMoreSheet(false)">
+      <div class="bottom-sheet-drawer" onclick="event.stopPropagation()">
+        <div class="sheet-handle"></div>
+        <div class="sheet-header">
+          <h3>Menu do Sistema</h3>
+          <button class="btn-close-sheet" onclick="app.toggleMobileMoreSheet(false)"><i class="ri-close-line"></i></button>
+        </div>
+        <div class="sheet-grid-menu">
+          <button class="sheet-item" onclick="app.navigate('pessoal'); app.toggleMobileMoreSheet(false);">
+            <div class="sheet-icon bg-blue"><i class="ri-user-smile-line"></i></div>
+            <span>Pessoal</span>
+          </button>
+          <button class="sheet-item" onclick="app.navigate('metas'); app.toggleMobileMoreSheet(false);">
+            <div class="sheet-icon bg-amber"><i class="ri-flag-2-line"></i></div>
+            <span>Metas</span>
+          </button>
+          <button class="sheet-item" onclick="app.navigate('calendario'); app.toggleMobileMoreSheet(false);">
+            <div class="sheet-icon bg-indigo"><i class="ri-calendar-event-line"></i></div>
+            <span>Calendário</span>
+          </button>
+          <button class="sheet-item" onclick="app.openSettingsModal(); app.toggleMobileMoreSheet(false);">
+            <div class="sheet-icon bg-surface"><i class="ri-settings-4-line"></i></div>
+            <span>Configurações</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div> <!-- End App Shell -->
+
+  <!-- ==========================================================================
+       MODAIS
+       ========================================================================== -->
+
+  <!-- MODAL: DETALHES DO DIA DO CALENDÁRIO -->
+  <div class="modal-backdrop" id="modal-cal-day">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <i class="ri-calendar-event-fill text-blue"></i>
+          <h3 id="modal-cal-day-title">Compromissos do Dia</h3>
+        </div>
+        <button class="btn-close-modal" onclick="app.closeModals()"><i class="ri-close-line"></i></button>
+      </div>
+      <div class="modal-body">
+        <div id="modal-cal-day-content" style="display: flex; flex-direction: column; gap: 0.75rem;">
+          <!-- Rendered dynamically -->
+        </div>
+      </div>
+      <div class="modal-footer" style="justify-content: space-between;">
+        <button type="button" class="btn-modal-secondary" onclick="app.closeModals()">Fechar</button>
+        <button type="button" class="btn-modal-primary" id="btn-cal-day-add" onclick="app.openTaskModal()">
+          <i class="ri-add-line"></i> Adicionar Tarefa Neste Dia
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 1. QUICK ADD UNIFIED MODAL -->
+  <div class="modal-backdrop" id="modal-quick-add">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <i class="ri-flashlight-line text-blue"></i>
+          <h3>O que deseja registrar?</h3>
+        </div>
+        <button class="btn-close-modal" onclick="app.closeModals()"><i class="ri-close-line"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="quick-add-options-grid">
+          <button class="quick-opt-btn" onclick="app.closeModals(); app.openTaskModal();">
+            <div class="opt-icon bg-blue"><i class="ri-checkbox-circle-line"></i></div>
+            <div class="opt-info">
+              <strong>Nova Tarefa</strong>
+              <span>Rotina, afazeres & prioridades</span>
+            </div>
+            <i class="ri-arrow-right-s-line"></i>
+          </button>
+
+          <button class="quick-opt-btn" onclick="app.closeModals(); app.openFinanceTransactionModal();">
+            <div class="opt-icon bg-emerald"><i class="ri-exchange-dollar-line"></i></div>
+            <div class="opt-info">
+              <strong>Nova Despesa / Receita</strong>
+              <span>Entradas, contas e gastos</span>
+            </div>
+            <i class="ri-arrow-right-s-line"></i>
+          </button>
+
+          <button class="quick-opt-btn" onclick="app.closeModals(); app.openProjectModal();">
+            <div class="opt-icon bg-indigo"><i class="ri-layout-masonry-line"></i></div>
+            <div class="opt-info">
+              <strong>Novo Projeto (Produção)</strong>
+              <span>Cliente, escopo e prazos</span>
+            </div>
+            <i class="ri-arrow-right-s-line"></i>
+          </button>
+
+          <button class="quick-opt-btn" onclick="app.closeModals(); app.openMetaModal();">
+            <div class="opt-icon bg-amber"><i class="ri-flag-2-line"></i></div>
+            <div class="opt-info">
+              <strong>Nova Meta</strong>
+              <span>Objetivo e percentual</span>
+            </div>
+            <i class="ri-arrow-right-s-line"></i>
+          </button>
+
+          <button class="quick-opt-btn" onclick="app.closeModals(); app.openPersonalModal();">
+            <div class="opt-icon bg-purple"><i class="ri-user-smile-line"></i></div>
+            <div class="opt-info">
+              <strong>Item Pessoal / Lembrete</strong>
+              <span>Compromissos, ideias e notas</span>
+            </div>
+            <i class="ri-arrow-right-s-line"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. TASK MODAL -->
+  <div class="modal-backdrop" id="modal-task">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <i class="ri-checkbox-circle-fill text-blue"></i>
+          <h3 id="modal-task-title">Nova Tarefa</h3>
+        </div>
+        <button class="btn-close-modal" onclick="app.closeModals()"><i class="ri-close-line"></i></button>
+      </div>
+      <form id="form-task" onsubmit="app.handleSaveTask(event)">
+        <input type="hidden" id="task-id">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="task-input-title">Título da Tarefa <span class="required">*</span></label>
+            <input type="text" id="task-input-title" class="form-control" placeholder="Ex: Finalizar Ajuste Fino da Landing Page" required autofocus>
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label for="task-input-date">Data <span class="required">*</span></label>
+              <input type="date" id="task-input-date" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label for="task-input-time">Horário (Opcional)</label>
+              <input type="time" id="task-input-time" class="form-control">
+            </div>
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label for="task-input-priority">Prioridade</label>
+              <select id="task-input-priority" class="form-control">
+                <option value="alta">Alta Prioridade</option>
+                <option value="media" selected>Média Prioridade</option>
+                <option value="baixa">Baixa Prioridade</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="task-input-status">Status</label>
+              <select id="task-input-status" class="form-control">
+                <option value="a_fazer" selected>A fazer</option>
+                <option value="em_andamento">Em andamento</option>
+                <option value="concluida">Concluída</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label for="task-input-category">Categoria</label>
+              <select id="task-input-category" class="form-control">
+                <option value="CR Design">CR Design</option>
+                <option value="Web Design">Web Design</option>
+                <option value="Clientes">Clientes</option>
+                <option value="Pessoal">Pessoal</option>
+                <option value="Financeiro">Financeiro</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="task-input-project">Projeto Relacionado (Opcional)</label>
+              <select id="task-input-project" class="form-control">
+                <option value="">Nenhum projeto</option>
+                <!-- Populated via JS -->
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="task-input-desc">Descrição / Detalhes (Opcional)</label>
+            <textarea id="task-input-desc" class="form-control" rows="2" placeholder="Detalhes, checklists ou links úteis..."></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-modal-secondary" onclick="app.closeModals()">Cancelar</button>
+          <button type="submit" class="btn-modal-primary">Salvar Tarefa <span class="btn-asterisk">*</span></button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 3. FINANCE TRANSACTION MODAL -->
+  <div class="modal-backdrop" id="modal-finance-trans">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <i class="ri-exchange-dollar-line text-emerald"></i>
+          <h3 id="modal-finance-title">Novo Lançamento Financeiro</h3>
+        </div>
+        <button class="btn-close-modal" onclick="app.closeModals()"><i class="ri-close-line"></i></button>
+      </div>
+      <form id="form-finance-trans" onsubmit="app.handleSaveTransaction(event)">
+        <input type="hidden" id="trans-id">
+        <div class="modal-body">
+          <div class="type-toggle-group">
+            <label class="type-toggle-btn">
+              <input type="radio" name="trans_type" value="despesa" id="trans-type-despesa" checked onchange="app.updateFinanceCategoryOptions()">
+              <span class="type-btn-inner text-rose"><i class="ri-arrow-down-circle-line"></i> Despesa</span>
+            </label>
+            <label class="type-toggle-btn">
+              <input type="radio" name="trans_type" value="receita" id="trans-type-receita" onchange="app.updateFinanceCategoryOptions()">
+              <span class="type-btn-inner text-emerald"><i class="ri-arrow-up-circle-line"></i> Receita</span>
+            </label>
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label for="trans-input-amount">Valor (R$) <span class="required">*</span></label>
+              <input type="number" step="0.01" min="0" id="trans-input-amount" class="form-control form-control-lg" placeholder="0,00" required autofocus>
+            </div>
+            <div class="form-group">
+              <label for="trans-input-date">Data <span class="required">*</span></label>
+              <input type="date" id="trans-input-date" class="form-control" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="trans-input-desc">Descrição <span class="required">*</span></label>
+            <input type="text" id="trans-input-desc" class="form-control" placeholder="Ex: Pagamento Site Tera Marketing ou Internet Fibra" required>
+          </div>
+
+          <div class="form-group">
+            <label for="trans-input-category">Categoria <span class="required">*</span></label>
+            <select id="trans-input-category" class="form-control">
+              <!-- Populated dynamically based on type -->
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-modal-secondary" onclick="app.closeModals()">Cancelar</button>
+          <button type="submit" class="btn-modal-primary">Salvar Lançamento <span class="btn-asterisk">*</span></button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 4. BUDGET PLANNING MODAL -->
+  <div class="modal-backdrop" id="modal-budget-planning">
+    <div class="modal-dialog modal-md">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <i class="ri-pie-chart-2-fill text-blue"></i>
+          <h3>Planejamento & Divisão do Dinheiro</h3>
+        </div>
+        <button class="btn-close-modal" onclick="app.closeModals()"><i class="ri-close-line"></i></button>
+      </div>
+      <form id="form-budget-planning" onsubmit="app.handleSaveBudgetPlanning(event)">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="budget-input-expected-income">Receita Mensal Esperada (R$) <span class="required">*</span></label>
+            <input type="number" step="0.01" min="0" id="budget-input-expected-income" class="form-control form-control-lg" placeholder="1250.00" oninput="app.recalculateBudgetModalPreview()" required>
+            <small class="form-hint">Base de cálculo para a divisão de suas categorias.</small>
+          </div>
+
+          <div class="divider-title">
+            <span>DEFINIR VALORES DAS CATEGORIAS</span>
+          </div>
+
+          <div class="budget-editor-rows" id="budget-editor-categories-container">
+            <!-- Dynamic Category Input Rows -->
+          </div>
+
+          <div class="budget-modal-summary-box">
+            <div class="summary-line">
+              <span>Total Alocado:</span>
+              <strong id="modal-budget-total-allocated">R$ 0,00</strong>
+            </div>
+            <div class="summary-line highlight">
+              <span>Saldo Restante Disponível:</span>
+              <strong id="modal-budget-remaining-balance" class="text-blue">R$ 0,00</strong>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-modal-secondary" onclick="app.closeModals()">Cancelar</button>
+          <button type="submit" class="btn-modal-primary">Salvar Divisão <span class="btn-asterisk">*</span></button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 5. PRODUCTION PROJECT MODAL -->
+  <div class="modal-backdrop" id="modal-project">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <i class="ri-layout-masonry-fill text-blue"></i>
+          <h3 id="modal-project-title">Novo Projeto de Produção</h3>
+        </div>
+        <button class="btn-close-modal" onclick="app.closeModals()"><i class="ri-close-line"></i></button>
+      </div>
+      <form id="form-project" onsubmit="app.handleSaveProject(event)">
+        <input type="hidden" id="proj-id">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="proj-input-name">Nome do Projeto <span class="required">*</span></label>
+            <input type="text" id="proj-input-name" class="form-control" placeholder="Ex: Landing Page Tera Marketing" required autofocus>
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label for="proj-input-client">Cliente</label>
+              <input type="text" id="proj-input-client" class="form-control" placeholder="Ex: Dr. Ewerton / Tera">
+            </div>
+            <div class="form-group">
+              <label for="proj-input-type">Tipo de Produção</label>
+              <select id="proj-input-type" class="form-control">
+                <option value="Landing Page">Landing Page</option>
+                <option value="Website Institucional">Website Institucional</option>
+                <option value="Identidade Visual">Identidade Visual</option>
+                <option value="Edição de Vídeo">Edição de Vídeo</option>
+                <option value="Ajuste Fino / Otimização">Ajuste Fino / Otimização</option>
+                <option value="Consultoria & Design">Consultoria & Design</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label for="proj-input-start">Data de Início</label>
+              <input type="date" id="proj-input-start" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="proj-input-deadline">Prazo de Entrega <span class="required">*</span></label>
+              <input type="date" id="proj-input-deadline" class="form-control" required>
+            </div>
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label for="proj-input-status">Status</label>
+              <select id="proj-input-status" class="form-control">
+                <option value="andamento">Em Andamento</option>
+                <option value="revisao">Revisão do Cliente</option>
+                <option value="concluido">Concluído</option>
+                <option value="pausado">Em Pausa</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="proj-input-deliveries">Entregas Realizadas / Total</label>
+              <div class="deliveries-inputs-flex">
+                <input type="number" min="0" id="proj-input-del-done" class="form-control" placeholder="Entregues" value="0">
+                <span>de</span>
+                <input type="number" min="1" id="proj-input-del-total" class="form-control" placeholder="Total" value="1">
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label for="proj-input-value">Valor do Projeto (R$)</label>
+              <input type="number" step="0.01" min="0" id="proj-input-value" class="form-control" placeholder="Ex: 850.00">
+            </div>
+            <div class="form-group">
+              <label for="proj-input-completion-date">Data de Conclusão (Opcional)</label>
+              <input type="date" id="proj-input-completion-date" class="form-control">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="proj-input-notes">Observações & Escopo</label>
+            <textarea id="proj-input-notes" class="form-control" rows="2" placeholder="Notas sobre o projeto, links de figma, especificações..."></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-modal-secondary" onclick="app.closeModals()">Cancelar</button>
+          <button type="submit" class="btn-modal-primary">Salvar Projeto <span class="btn-asterisk">*</span></button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 6. META MODAL -->
+  <div class="modal-backdrop" id="modal-meta">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <i class="ri-flag-2-fill text-amber"></i>
+          <h3 id="modal-meta-title">Nova Meta</h3>
+        </div>
+        <button class="btn-close-modal" onclick="app.closeModals()"><i class="ri-close-line"></i></button>
+      </div>
+      <form id="form-meta" onsubmit="app.handleSaveMeta(event)">
+        <input type="hidden" id="meta-id">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="meta-input-name">Nome da Meta <span class="required">*</span></label>
+            <input type="text" id="meta-input-name" class="form-control" placeholder="Ex: Montar reserva financeira ou Novo MacBook" required autofocus>
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label for="meta-input-category">Categoria</label>
+              <select id="meta-input-category" class="form-control">
+                <option value="Financeiro">Financeiro</option>
+                <option value="Profissional">Profissional</option>
+                <option value="CR Design">CR Design</option>
+                <option value="Pessoal">Pessoal</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="meta-input-deadline">Prazo Limite <span class="required">*</span></label>
+              <input type="date" id="meta-input-deadline" class="form-control" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="meta-input-progress">Progresso Atual: <strong id="meta-progress-label" class="text-blue">50%</strong></label>
+            <input type="range" min="0" max="100" value="50" id="meta-input-progress" class="form-range-slider" oninput="document.getElementById('meta-progress-label').innerText = this.value + '%'">
+          </div>
+
+          <div class="form-group">
+            <label for="meta-input-desc">Descrição / Motivação</label>
+            <textarea id="meta-input-desc" class="form-control" rows="2" placeholder="O que é necessário para atingir esta meta..."></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-modal-secondary" onclick="app.closeModals()">Cancelar</button>
+          <button type="submit" class="btn-modal-primary">Salvar Meta <span class="btn-asterisk">*</span></button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 7. PERSONAL ITEM MODAL -->
+  <div class="modal-backdrop" id="modal-personal">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <i class="ri-user-smile-fill text-blue"></i>
+          <h3 id="modal-personal-title">Novo Registro Pessoal</h3>
+        </div>
+        <button class="btn-close-modal" onclick="app.closeModals()"><i class="ri-close-line"></i></button>
+      </div>
+      <form id="form-personal" onsubmit="app.handleSavePersonalItem(event)">
+        <input type="hidden" id="personal-id">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="personal-input-type">Tipo de Registro</label>
+            <select id="personal-input-type" class="form-control" onchange="app.updatePersonalModalFields()">
+              <option value="evento">Compromisso / Evento</option>
+              <option value="nota">Anotação / Ideia</option>
+              <option value="info">Informação Importante</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="personal-input-title">Título / Assunto <span class="required">*</span></label>
+            <input type="text" id="personal-input-title" class="form-control" placeholder="Ex: Treino, Consulta, Ideia de feature..." required autofocus>
+          </div>
+
+          <div class="form-row-2" id="personal-fields-datetime">
+            <div class="form-group">
+              <label for="personal-input-date">Data</label>
+              <input type="date" id="personal-input-date" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="personal-input-time">Horário</label>
+              <input type="time" id="personal-input-time" class="form-control">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="personal-input-content">Conteúdo / Descrição / Detalhes</label>
+            <textarea id="personal-input-content" class="form-control" rows="3" placeholder="Escreva os detalhes..."></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-modal-secondary" onclick="app.closeModals()">Cancelar</button>
+          <button type="submit" class="btn-modal-primary">Salvar <span class="btn-asterisk">*</span></button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 8. SETTINGS & BACKUP MODAL -->
+  <div class="modal-backdrop" id="modal-settings">
+    <div class="modal-dialog modal-md">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <i class="ri-settings-4-fill text-blue"></i>
+          <h3>Configurações & Backup de Dados</h3>
+        </div>
+        <button class="btn-close-modal" onclick="app.closeModals()"><i class="ri-close-line"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="settings-section">
+          <h4><i class="ri-database-2-line"></i> Armazenamento e Persistência</h4>
+          <p class="settings-desc">
+            Todos os seus dados são salvos com segurança no seu navegador via LocalStorage. Você pode fazer backup a qualquer momento ou restaurar dados em outro dispositivo.
+          </p>
+          <div class="settings-actions-flex">
+            <button class="btn-setting" onclick="app.exportDataBackup()">
+              <i class="ri-download-2-line"></i>
+              <span>Exportar Backup (JSON)</span>
+            </button>
+            <label class="btn-setting">
+              <i class="ri-upload-2-line"></i>
+              <span>Restaurar Backup</span>
+              <input type="file" id="backup-file-input" accept=".json" style="display:none;" onchange="app.importDataBackup(event)">
+            </label>
+          </div>
+        </div>
+
+        <div class="settings-section">
+          <h4><i class="ri-notification-3-line"></i> Notificações no Navegador & Mobile</h4>
+          <p class="settings-desc">
+            Ative para receber alertas automáticos de prazos de entregas, tarefas do dia e avisos de rotina diretamente no seu dispositivo.
+          </p>
+          <div class="notif-status-badge-row">
+            <span>Status da Permissão:</span>
+            <span class="notif-status-pill" id="settings-notif-status">Verificando...</span>
+          </div>
+          <div class="settings-actions-flex" style="margin-top: 0.75rem;">
+            <button class="btn-setting" id="btn-settings-request-notif" onclick="app.requestNotificationPermission()">
+              <i class="ri-notification-3-fill"></i>
+              <span>Ativar Notificações</span>
+            </button>
+            <button class="btn-setting" onclick="app.sendTestNotification()">
+              <i class="ri-flashlight-line"></i>
+              <span>Enviar Teste *</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="settings-section">
+          <h4><i class="ri-paint-brush-line"></i> Identidade Visual & Tema</h4>
+          <div class="theme-toggle-row">
+            <span>Tema do Sistema:</span>
+            <div class="theme-buttons">
+              <button class="btn-theme-opt" id="btn-theme-light" onclick="app.setTheme('light')"><i class="ri-sun-line"></i> Light (Padrão)</button>
+              <button class="btn-theme-opt" id="btn-theme-dark" onclick="app.setTheme('dark')"><i class="ri-moon-line"></i> Dark (CR Design)</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="settings-section danger-zone">
+          <h4><i class="ri-error-warning-line"></i> Restaurar Dados Demonstrativos</h4>
+          <p class="settings-desc">Recarregar os dados iniciais recomendados da CR Design.</p>
+          <button class="btn-danger-setting" onclick="app.resetDefaultData()">
+            <i class="ri-restart-line"></i>
+            <span>Redefinir para Dados Padrão</span>
+          </button>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-modal-secondary" onclick="app.closeModals()">Fechar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION CONTAINER -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Main System Script -->
+  <script src="app.js"></script>
+</body>
+</html>
