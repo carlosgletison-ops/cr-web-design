@@ -7,23 +7,41 @@
   <meta name="description" content="CR web design — Design cirúrgico, minimalista e estratégico para sites e landing pages de alta conversão.">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
 
-  <!-- Google Fonts: Montserrat (Asterisks & Bold Heads), Poppins, Public Sans, EB Garamond -->
+  <!-- Google Fonts: Montserrat (Asterisks & Numerals), Poppins (Headings), Public Sans (Body), EB Garamond (Editorial Accent), Space Mono (HUD) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@1,400;1,500;1,600;1,700&family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700&family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700&family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@1,400;1,500;1,600&family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700&family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700&family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 
   <!-- Remix Icon -->
   <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+
+  <!-- GSAP 3 & ScrollTrigger for Cinematic Motion -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 
   <!-- Main Stylesheet -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body class="dark-theme">
 
-  <!-- BACKGROUND SUBTLE GRID -->
+  <!-- ARCHITECTURAL SUBTLE GRID BACKGROUND -->
   <div class="bg-grid-overlay" aria-hidden="true"></div>
 
-  <!-- DYNAMIC FLOATING NAVBAR (Expands upon scroll) -->
+  <!-- PERSISTENT KINETIC FLOATING ASTERISK -->
+  <div class="kinetic-asterisk-stage" id="kinetic-asterisk-stage" aria-hidden="true">
+    <div class="kinetic-asterisk-wrapper" id="kinetic-asterisk-wrapper">
+      <svg class="kinetic-asterisk-svg" id="kinetic-asterisk-svg" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="85" y="12" width="30" height="176" rx="4" fill="#0d5bff" />
+        <rect x="85" y="12" width="30" height="176" rx="4" fill="#0d5bff" transform="rotate(60 100 100)" />
+        <rect x="85" y="12" width="30" height="176" rx="4" fill="#0d5bff" transform="rotate(120 100 100)" />
+      </svg>
+    </div>
+  </div>
+
+  <!-- AMBIENT MOTION LIGHT (DESKTOP) -->
+  <div class="ambient-cursor-glow" id="cursor-glow" aria-hidden="true"></div>
+
+  <!-- DYNAMIC FLOATING NAVBAR -->
   <header class="floating-nav-wrapper" id="navbar-wrapper">
     <div class="floating-nav compact" id="navbar">
       
@@ -31,21 +49,20 @@
         <span class="logo-symbol">*</span>
       </a>
 
-      <!-- Expanded Links (Hidden when compact at hero, smoothly revealed on scroll) -->
+      <!-- Navigation Menu -->
       <nav class="nav-menu" id="nav-menu">
         <ul class="nav-list">
-          <li><a href="#ajuste-de-rota" class="nav-link">Diagnóstico</a></li>
-          <li><a href="#conceito" class="nav-link">O Conceito *</a></li>
-          <li><a href="#servicos" class="nav-link">Serviços</a></li>
-          <li><a href="#processo" class="nav-link">Processo</a></li>
-          <li><a href="#comparativo" class="nav-link">Transformação</a></li>
+          <li><a href="#hero-track" class="nav-link">Início <span class="nav-link-star">*</span></a></li>
+          <li><a href="#ajuste-fine" class="nav-link">Ajuste Fino <span class="nav-link-star">*</span></a></li>
+          <li><a href="#sobre-mim" class="nav-link">Sobre <span class="nav-link-star">*</span></a></li>
+          <li><a href="#visual-playground" class="nav-link">Playground <span class="nav-link-star">*</span></a></li>
         </ul>
       </nav>
 
       <div class="header-actions">
         <a href="https://wa.me/5588999549560?text=Ol%C3%A1%20Carlos!%20Vim%20pelo%20site%20da%20CR%20web%20design%20e%20gostaria%20de%20um%20diagn%C3%B3stico%20para%20meu%20site." 
-           class="btn-nav" target="_blank" rel="noopener noreferrer">
-          <span>Iniciar Diagnóstico</span>
+           class="btn-nav magnetic-btn" target="_blank" rel="noopener noreferrer">
+          <span class="btn-text">Iniciar Diagnóstico</span>
           <span class="btn-asterisk">*</span>
         </a>
         <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menu mobile">
@@ -62,24 +79,24 @@
     <section class="hero-scroll-track" id="hero-track">
       <div class="hero-sticky-frame" id="hero-sticky-frame">
         
-        <!-- Hero Stage: Centered Asterisk with Concise Headline Below -->
+        <!-- Hero Stage -->
         <div class="hero-center-stage" id="hero-stage">
           
-          <!-- Central Vector Asterisk (100% Crisp Mathematical Vector) -->
-          <div class="zoom-asterisk-container" id="zoom-asterisk-container">
-            <svg class="zoom-asterisk-svg" id="zoom-asterisk" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="85" y="12" width="30" height="176" rx="3" fill="#0d5bff" />
-              <rect x="85" y="12" width="30" height="176" rx="3" fill="#0d5bff" transform="rotate(60 100 100)" />
-              <rect x="85" y="12" width="30" height="176" rx="3" fill="#0d5bff" transform="rotate(120 100 100)" />
-            </svg>
-          </div>
+          <!-- Central Hero Anchor Area -->
+          <div class="hero-asterisk-anchor" id="hero-asterisk-anchor"></div>
 
-          <!-- Concise Text Positioned Below Asterisk -->
+          <!-- Headline & Minimal Meta -->
           <div class="hero-text-below" id="hero-intro-view">
-            <h1 class="hero-headline-concise">
-              Seu site não precisa de mais do mesmo.
-              <span class="headline-sub-accent">Precisa do Ajuste Fino <span class="cyan-asterisk">*</span>.</span>
+            <h1 class="hero-headline-concise gsap-reveal">
+              <span class="hero-line">Seu site não precisa de mais do mesmo.</span>
+              <span class="headline-sub-accent">Precisa do <span class="fine-word-ajustar">Ajuste Fino</span><span class="fine-period">*</span></span>
             </h1>
+            <div class="hero-scroll-indicator gsap-reveal">
+              <div class="scroll-track-line">
+                <div class="scroll-track-thumb"></div>
+              </div>
+              <span class="scroll-hint-text">Role para explorar</span>
+            </div>
           </div>
 
         </div>
@@ -88,488 +105,80 @@
         <div class="blue-reveal-curtain" id="blue-curtain">
           <div class="curtain-content" id="curtain-content">
             <span class="curtain-asterisk">*</span>
-            <h2 class="curtain-title">O detalhe não é apenas um detalhe. Ele é o design por inteiro.</h2>
-            <p class="curtain-subtitle">Design cirúrgico &bull; Alta conversão &bull; Zero atrito</p>
+            <blockquote class="curtain-quote-block">
+              <h2 class="curtain-title"><span class="curtain-quote-mark">“</span>O detalhe não é apenas um detalhe.<br class="hide-mobile"> Ele é o design por inteiro.<span class="curtain-quote-mark">”</span></h2>
+            </blockquote>
           </div>
         </div>
 
       </div>
     </section>
 
-    <!-- MAIN BODY SECTIONS (Revealed after the zoom transition) -->
-    <div class="post-hero-content" id="main-content">
-
-      <!-- ==========================================================================
-           SECTION: 3D INTERACTIVE SHOWCASE DECK (Awwwards / Jake Sinclair style)
-           ========================================================================== -->
-      <section class="section-3d-showcase" id="portfolio-deck">
-        <div class="container showcase-container">
-          
-          <!-- Left / Intro Text Column -->
-          <div class="showcase-intro">
-            <div class="showcase-badge">
-              <span class="badge-dot"></span>
-              <span>PORTFÓLIO & EXPERIÊNCIAS DIGITAIS</span>
-            </div>
-            <h2 class="showcase-title">
-              Design cirúrgico que destaca sua marca e 
-              <span class="highlight-blue">converte visitantes em clientes <span class="cyan-asterisk">*</span></span>
-            </h2>
-            <p class="showcase-desc">
-              Landing pages, websites e experiências digitais lapidadas com precisão milimétrica. Sem modelos genéricos — cada detalhe é desenhado para gerar autoridade e impacto visual imediato.
-            </p>
-            <div class="showcase-hint">
-              <i class="ri-cursor-line"></i>
-              <span>Passe o mouse ou toque para interagir com os projetos em 3D</span>
-            </div>
-          </div>
-
-          <!-- Right / 3D Cascading Fanned Deck Stage (Jake Sinclair Style) -->
-          <div class="showcase-stage-wrapper" id="deck-stage-wrapper">
-            <div class="deck-fanned-3d" id="deck-fanned">
-              
-              <!-- Card 0: Tera Marketing -->
-              <div class="fanned-card card-item-0" data-index="0">
-                <div class="card-glass-frame">
-                  <img src="assets/projects/project-tera.png" alt="Tera Marketing" class="card-img" loading="lazy">
-                  <div class="card-floating-badge">
-                    <span class="badge-cat">Marketing & Growth</span>
-                    <span class="badge-name">Tera Marketing</span>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Card 1: JF Mota -->
-              <div class="fanned-card card-item-1" data-index="1">
-                <div class="card-glass-frame">
-                  <img src="assets/projects/project-jfmota.png" alt="JF Mota" class="card-img" loading="lazy">
-                  <div class="card-floating-badge">
-                    <span class="badge-cat">Home Center & Vendas</span>
-                    <span class="badge-name">JF Mota</span>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Card 2: Via Medicamentos -->
-              <div class="fanned-card card-item-2" data-index="2">
-                <div class="card-glass-frame">
-                  <img src="assets/projects/project-viamedicamentos.png" alt="Via Medicamentos" class="card-img" loading="lazy">
-                  <div class="card-floating-badge">
-                    <span class="badge-cat">Farmacêutica</span>
-                    <span class="badge-name">Via Medicamentos</span>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Card 3: O Irmão Autopeças -->
-              <div class="fanned-card card-item-3" data-index="3">
-                <div class="card-glass-frame">
-                  <img src="assets/projects/project-irmao.png" alt="O Irmão Autopeças" class="card-img" loading="lazy">
-                  <div class="card-floating-badge">
-                    <span class="badge-cat">Autopeças & Serviços</span>
-                    <span class="badge-name">O Irmão</span>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Card 4: Meldica Cosméticos -->
-              <div class="fanned-card card-item-4" data-index="4">
-                <div class="card-glass-frame">
-                  <img src="assets/projects/project-meldica.png" alt="Meldica Cosméticos" class="card-img" loading="lazy">
-                  <div class="card-floating-badge">
-                    <span class="badge-cat">E-commerce & Cosméticos</span>
-                    <span class="badge-name">Meldica</span>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Card 5: Joias Kauê -->
-              <div class="fanned-card card-item-5" data-index="5">
-                <div class="card-glass-frame">
-                  <img src="assets/projects/project-joias.png" alt="Kauê Joias" class="card-img" loading="lazy">
-                  <div class="card-floating-badge">
-                    <span class="badge-cat">E-commerce & Joalheria</span>
-                    <span class="badge-name">Kauê Joias</span>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-          </div>
-
-        </div>
-
-        <!-- Infinite Brand Marquee Ticker -->
-        <div class="showcase-marquee" aria-hidden="true">
-          <div class="marquee-track">
-            <span class="marquee-item">TERA MARKETING</span>
-            <span class="marquee-sep">*</span>
-            <span class="marquee-item">JF MOTA HOME CENTER</span>
-            <span class="marquee-sep">*</span>
-            <span class="marquee-item">VIA MEDICAMENTOS</span>
-            <span class="marquee-sep">*</span>
-            <span class="marquee-item">O IRMÃO AUTOPEÇAS</span>
-            <span class="marquee-sep">*</span>
-            <span class="marquee-item">MELDICA COSMÉTICOS</span>
-            <span class="marquee-sep">*</span>
-            <span class="marquee-item">CR WEB DESIGN</span>
-            <span class="marquee-sep">*</span>
-            <!-- Duplicate for continuous scroll -->
-            <span class="marquee-item">TERA MARKETING</span>
-            <span class="marquee-sep">*</span>
-            <span class="marquee-item">JF MOTA HOME CENTER</span>
-            <span class="marquee-sep">*</span>
-            <span class="marquee-item">VIA MEDICAMENTOS</span>
-            <span class="marquee-sep">*</span>
-            <span class="marquee-item">O IRMÃO AUTOPEÇAS</span>
-            <span class="marquee-sep">*</span>
-            <span class="marquee-item">MELDICA COSMÉTICOS</span>
-            <span class="marquee-sep">*</span>
-            <span class="marquee-item">CR WEB DESIGN</span>
-            <span class="marquee-sep">*</span>
-          </div>
-        </div>
-      </section>
-
-      <!-- SECTION: AJUSTE DE ROTA -->
-      <section class="section-route" id="ajuste-de-rota">
-        <div class="container">
-          
-          <div class="section-head text-center">
-            <h2 class="section-title">
-              Você está perdendo vendas por causa de detalhes invisíveis?
-            </h2>
-            <p class="section-desc">
-              94% das primeiras impressões sobre uma empresa são diretamente ligadas ao design do site. A maioria dos negócios perde clientes nos primeiros 3 segundos sem nunca saber o motivo.
-            </p>
-          </div>
-
-          <div class="route-grid">
-            <!-- Item 1 -->
-            <div class="route-card">
-              <div class="route-top">
-                <span class="route-bullet-asterisk">*</span>
-                <span class="route-num">01</span>
-              </div>
-              <h3 class="route-card-title">Páginas lentas.</h3>
-              <p class="route-card-text">
-                Cada segundo extra de carregamento reduz as conversões em até 20%. Sites pesados e mal construídos frustram o usuário antes mesmo da primeira leitura.
-              </p>
-            </div>
-
-            <!-- Item 2 -->
-            <div class="route-card">
-              <div class="route-top">
-                <span class="route-bullet-asterisk">*</span>
-                <span class="route-num">02</span>
-              </div>
-              <h3 class="route-card-title">Design ultrapassado.</h3>
-              <p class="route-card-text">
-                Modelos genéricos e templates prontos transmitem amadorismo. Sem um visual sofisticado e proprietário, sua autoridade no mercado é invisível.
-              </p>
-            </div>
-
-            <!-- Item 3 -->
-            <div class="route-card">
-              <div class="route-top">
-                <span class="route-bullet-asterisk">*</span>
-                <span class="route-num">03</span>
-              </div>
-              <h3 class="route-card-title">Falta de clareza.</h3>
-              <p class="route-card-text">
-                Textos confusos, hierarquia visual truncada e chamadas para ação ocultas dispersam o visitante. Se o cliente precisa pensar para comprar, ele desiste.
-              </p>
-            </div>
-          </div>
-
-          <!-- Editorial Callout Banner -->
-          <div class="route-callout">
-            <div class="callout-left">
-              <span class="callout-asterisk">*</span>
-              <div class="callout-content">
-                <h4>A boa notícia: você não precisa reconstruir tudo do zero sem critério.</h4>
-                <p>O Ajuste Fino identifica o gargalo cirúrgico e reposiciona a sua presença com máxima precisão.</p>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </section>
-
-      <!-- SECTION: THE CONCEPT SECTION (THE HEART) -->
-      <section class="section-concept" id="conceito">
+    <!-- ==========================================================================
+         SEGUNDA SEÇÃO: O DETALHE MUDA TUDO (CR DESIGN® — AJUSTE FINE)
+         Composição editorial de alta escala, tipografia monumental & sombras sólidas
+         ========================================================================== -->
+    <section class="section-ajuste-fine" id="ajuste-fine">
+      <div class="fine-container">
         
-        <!-- Giant Background Asterisk in Top Corner (High Opacity Solid Vector) -->
-        <div class="concept-corner-asterisk" aria-hidden="true">
-          <svg viewBox="0 0 1000 1000" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="420" y="40" width="160" height="920" rx="16" fill="#0d5bff" />
-            <rect x="420" y="40" width="160" height="920" rx="16" fill="#0d5bff" transform="rotate(60 500 500)" />
-            <rect x="420" y="40" width="160" height="920" rx="16" fill="#0d5bff" transform="rotate(120 500 500)" />
-          </svg>
+        <!-- Monumental Editorial Headline -->
+        <div class="fine-title-wrapper">
+          <h2 class="fine-monumental-title">
+            <span class="fine-line gsap-fine-line"><span class="fine-num-marker">01/</span> Não é sobre fazer mais.</span>
+            <span class="fine-line fine-accent-line gsap-fine-line">
+              É sobre <span class="fine-word-ajustar">ajustar</span> melhor<span class="fine-period">*</span>
+            </span>
+          </h2>
         </div>
 
-        <div class="container">
+        <!-- Editorial Grid Layout (Support Narrative + Quote Block + Signature) -->
+        <div class="fine-editorial-grid">
           
-          <div class="section-head text-center">
-            <h2 class="section-title">
-              O Conceito do Asterisco
-            </h2>
-            <p class="section-desc">
-              Na tipografia, o asterisco é o apontamento do detalhe essencial. Na programação e na matemática, é o curinga universal e o multiplicador. Na <strong>CR web design</strong>, é a ferramenta que transforma sites comuns em máquinas de autoridade e faturamento.
-            </p>
+          <!-- Left Column: Support Text Narrative with calibration lines -->
+          <div class="fine-narrative-col">
+            <div class="fine-lead-item gsap-fine-item">
+              <span class="narrative-bar"></span>
+              <p class="narrative-lead-p">
+                Entre o que funciona e o que realmente marca, existe uma diferença.
+              </p>
+            </div>
+
+            <div class="fine-detail-p-wrap gsap-fine-item">
+              <p class="narrative-body-p">
+                Às vezes, é um corte. Uma proporção. Um movimento. Uma escolha que parece pequena, até você perceber que era exatamente o que faltava.
+              </p>
+            </div>
+
+            <div class="fine-focus-stamp gsap-fine-item">
+              <span class="stamp-accent-box">PRECISÃO</span>
+              <p class="narrative-focus-p">
+                É nesse espaço que eu trabalho.
+              </p>
+            </div>
           </div>
 
-          <div class="concept-grid">
+          <!-- Right Column: Solid Quote Block & Signature -->
+          <div class="fine-statement-col">
             
-            <!-- Column 1: A CORREÇÃO -->
-            <div class="concept-column">
-              <div class="concept-icon-box">
-                <div class="glowing-asterisk-icon">*</div>
+            <!-- Frase de Destaque (Solid Contrast Box with Hard 100% Opaque Shadow) -->
+            <div class="fine-quote-block gsap-fine-quote">
+              <div class="quote-header-mini">
+                <span class="mini-asterisk">*</span>
+                <span class="mini-label">MANIFESTO DE INTENÇÃO</span>
               </div>
-              <div class="concept-header">
-                <span class="concept-step-idx">01</span>
-                <h3 class="concept-col-title">A CORREÇÃO</h3>
-                <p class="concept-serif-accent">*Ajuste Técnico</p>
-              </div>
-              <div class="concept-body">
-                <p class="concept-desc">
-                  Eliminamos cada milissegundo de lentidão, bugs de responsividade mobile e erros de carregamento que drenam o tráfego do seu negócio.
-                </p>
-                <ul class="concept-list">
-                  <li><span class="cyan-bullet">*</span> Otimização de Web Vitals (LCP &lt; 1.2s)</li>
-                  <li><span class="cyan-bullet">*</span> Estrutura HTML5 limpa e sem scripts inúteis</li>
-                  <li><span class="cyan-bullet">*</span> Experiência fluida em 100% dos smartphones</li>
-                </ul>
-              </div>
-              <div class="concept-footer-meta">
-                <span>FUNDAÇÃO SÓLIDA</span>
-              </div>
+              <blockquote class="quote-statement">
+                “O detalhe não é o final do processo. É onde tudo começa a fazer sentido.”
+              </blockquote>
+              <div class="quote-corner-indicator" aria-hidden="true"></div>
             </div>
 
-            <!-- Column 2: O DESTAQUE -->
-            <div class="concept-column featured-concept">
-              <div class="concept-icon-box">
-                <div class="glowing-asterisk-icon">*</div>
-              </div>
-              <div class="concept-header">
-                <span class="concept-step-idx">02</span>
-                <h3 class="concept-col-title">O DESTAQUE</h3>
-                <p class="concept-serif-accent">*Layout Estratégico</p>
-              </div>
-              <div class="concept-body">
-                <p class="concept-desc">
-                  Substituímos o visual genérico por uma direção de arte sofisticada, grid editorial impecável e tipografia de alto impacto que impõe respeito imediato.
-                </p>
-                <ul class="concept-list">
-                  <li><span class="cyan-bullet">*</span> Identidade visual contemporânea e exclusiva</li>
-                  <li><span class="cyan-bullet">*</span> Espaçamento generoso e hierarquia clara</li>
-                  <li><span class="cyan-bullet">*</span> Micro-interações táteis e envolventes</li>
-                </ul>
-              </div>
-              <div class="concept-footer-meta">
-                <span>PERCEPÇÃO PREMIUM</span>
-              </div>
-            </div>
-
-            <!-- Column 3: A MULTIPLICAÇÃO -->
-            <div class="concept-column">
-              <div class="concept-icon-box">
-                <div class="glowing-asterisk-icon">*</div>
-              </div>
-              <div class="concept-header">
-                <span class="concept-step-idx">03</span>
-                <h3 class="concept-col-title">A MULTIPLICAÇÃO</h3>
-                <p class="concept-serif-accent">*Código Otimizado</p>
-              </div>
-              <div class="concept-body">
-                <p class="concept-desc">
-                  Arquitetura de conversão programada para transformar cliques em clientes pagantes, integrando pontos de contato estratégicos em toda a jornada.
-                </p>
-                <ul class="concept-list">
-                  <li><span class="cyan-bullet">*</span> CTAs de alta taxa de clique estrategicamente alinhados</li>
-                  <li><span class="cyan-bullet">*</span> Integração direta com WhatsApp e canais de venda</li>
-                  <li><span class="cyan-bullet">*</span> Indexação e SEO técnico para mecanismos de busca</li>
-                </ul>
-              </div>
-              <div class="concept-footer-meta">
-                <span>ALAVANCAGEM DE VENDAS</span>
-              </div>
-            </div>
-
-          </div>
-
-          <!-- FOOTNOTE EDITORIAL NOTE (RODAPÉ STYLE) -->
-          <div class="concept-editorial-footnote">
-            <div class="footnote-inner">
-              <span class="footnote-mark">*</span>
-              <div class="footnote-text">
-                <p class="footnote-serif-quote">
-                  <strong>Nota Teórica do Sistema:</strong> O asterisco não é apenas um adorno gráfico. Em linguística computacional e sintaxe operacional, o <code>*</code> opera como o operador de expansão irrestrita. Aplicado ao web design, representa a calibração cirúrgica que eleva uma página comum ao status de patrimônio digital proprietário.
-                </p>
-                <p class="footnote-sign">CR web design &bull; Manual de Identidade e Metodologia Estrutural</p>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </section>
-
-      <!-- SECTION: SERVICES -->
-      <section class="section-services" id="servicos">
-        <div class="container">
-          
-          <div class="section-head text-center">
-            <h2 class="section-title">
-              Serviços com o Padrão do Ajuste Fino <span class="cyan-asterisk">*</span>
-            </h2>
-            <p class="section-desc">
-              Desenvolvemos soluções digitais sob medida para profissionais, empresas e marcas que recusam o mediano.
-            </p>
-          </div>
-
-          <div class="services-grid">
-            
-            <!-- Service Tile 1 -->
-            <div class="service-card">
-              <div class="service-icon-wrap">
-                <i class="ri-flashlight-line"></i>
-              </div>
-              <div class="service-content">
-                <div class="service-tag">ALTA PERFORMANCE</div>
-                <h3 class="service-title">Landing Pages de Alta Conversão</h3>
-                <p class="service-text">
-                  Páginas focadas em um único objetivo: transformar tráfego em vendas e leads qualificados. Copywriting afiado, layout direto ao ponto e carregamento instantâneo.
-                </p>
-                <ul class="service-features">
-                  <li><i class="ri-check-line"></i> Copy e estrutura orientada a vendas</li>
-                  <li><i class="ri-check-line"></i> Integração direta de WhatsApp / CRM</li>
-                  <li><i class="ri-check-line"></i> Testes de usabilidade e responsividade</li>
-                </ul>
-              </div>
-              <a href="https://wa.me/5588999549560?text=Ol%C3%A1%20Carlos!%20Quero%20uma%20Landing%20Page%20de%20Alta%20Convers%C3%A3o%20para%20o%20meu%20projeto." 
-                 class="service-link" target="_blank" rel="noopener noreferrer">
-                <span>Orçar Landing Page</span>
-                <i class="ri-arrow-right-line"></i>
-              </a>
-            </div>
-
-            <!-- Service Tile 2 -->
-            <div class="service-card">
-              <div class="service-icon-wrap">
-                <i class="ri-building-line"></i>
-              </div>
-              <div class="service-content">
-                <div class="service-tag">AUTORIDADE &amp; ESCALA</div>
-                <h3 class="service-title">Sites Institucionais</h3>
-                <p class="service-text">
-                  A presença digital definitiva para a sua marca ou empresa. Apresentação corporativa impecável que transmite solidez, modernidade e liderança no segmento.
-                </p>
-                <ul class="service-features">
-                  <li><i class="ri-check-line"></i> Arquitetura multi-página estratégica</li>
-                  <li><i class="ri-check-line"></i> Design editorial moderno e refinado</li>
-                  <li><i class="ri-check-line"></i> Painel intuitivo para gerenciamento</li>
-                </ul>
-              </div>
-              <a href="https://wa.me/5588999549560?text=Ol%C3%A1%20Carlos!%20Gostaria%20de%20or%C3%A7ar%20um%20Site%20Institucional%20para%20minha%20empresa." 
-                 class="service-link" target="_blank" rel="noopener noreferrer">
-                <span>Orçar Site Institucional</span>
-                <i class="ri-arrow-right-line"></i>
-              </a>
-            </div>
-
-            <!-- Service Tile 3 -->
-            <div class="service-card">
-              <div class="service-icon-wrap">
-                <i class="ri-layout-masonry-line"></i>
-              </div>
-              <div class="service-content">
-                <div class="service-tag">REFINAMENTO DE PRODUTO</div>
-                <h3 class="service-title">UI/UX Design Otimizado</h3>
-                <p class="service-text">
-                  Prototipagem e redesenho de interfaces para sistemas, aplicativos e plataformas SaaS. Ergonomia visual focada na facilidade de uso e fidelização.
-                </p>
-                <ul class="service-features">
-                  <li><i class="ri-check-line"></i> Design System completo e escalável</li>
-                  <li><i class="ri-check-line"></i> Wireframes e protótipos interativos no Figma</li>
-                  <li><i class="ri-check-line"></i> Redução de atrito em fluxos complexos</li>
-                </ul>
-              </div>
-              <a href="https://wa.me/5588999549560?text=Ol%C3%A1%20Carlos!%20Gostaria%20de%20falar%20sobre%20UI%2FUX%20Design%20Otimizado." 
-                 class="service-link" target="_blank" rel="noopener noreferrer">
-                <span>Orçar UI/UX Design</span>
-                <i class="ri-arrow-right-line"></i>
-              </a>
-            </div>
-
-          </div>
-
-        </div>
-      </section>
-
-      <!-- SECTION: INTERACTIVE TRANSFORMATION COMPARISON -->
-      <section class="section-comparison" id="comparativo">
-        <div class="container">
-          
-          <div class="comparison-card">
-            <div class="comparison-header">
-              <h2 class="comparison-title">O que muda na prática com o Ajuste Fino <span class="cyan-asterisk">*</span>?</h2>
-            </div>
-
-            <div class="comparison-toggle-wrap">
-              <button class="toggle-btn active" id="btn-show-after">
-                <span class="cyan-bullet">*</span> Com Ajuste Fino (CR)
-              </button>
-              <button class="toggle-btn" id="btn-show-before">
-                <span>Site Genérico Comum</span>
-              </button>
-            </div>
-
-            <div class="comparison-display" id="comparison-display">
-              <!-- State: Com Ajuste Fino -->
-              <div class="display-state state-after active" id="state-after">
-                <div class="state-grid">
-                  <div class="state-col">
-                    <h3 class="state-headline">Experiência Imersiva &bull; Conversão Máxima</h3>
-                    <ul class="state-list">
-                      <li><i class="ri-check-double-line"></i> <strong>Velocidade Cirúrgica:</strong> Abre em menos de 1 segundo em qualquer rede móvel.</li>
-                      <li><i class="ri-check-double-line"></i> <strong>Autoridade Visual:</strong> Identidade editorial que coloca você no topo do mercado.</li>
-                      <li><i class="ri-check-double-line"></i> <strong>Jornada Sem Atrito:</strong> Cada elemento guia o olhar do cliente para o fechamento.</li>
-                    </ul>
-                  </div>
-                  <div class="state-col state-metrics-box">
-                    <div class="score-card">
-                      <span class="score-num">99/100</span>
-                      <span class="score-label">Google PageSpeed Score</span>
-                    </div>
-                    <div class="score-card">
-                      <span class="score-num">3.8x</span>
-                      <span class="score-label">Média de Aumento em Contatos</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- State: Site Genérico -->
-              <div class="display-state state-before" id="state-before">
-                <div class="state-grid">
-                  <div class="state-col">
-                    <h3 class="state-headline text-muted">Lentidão &bull; Falta de Identidade &bull; Fuga de Clientes</h3>
-                    <ul class="state-list text-muted">
-                      <li><i class="ri-close-line"></i> <strong>Carregamento Pesado:</strong> Scripts desnecessários e imagens sem compressão.</li>
-                      <li><i class="ri-close-line"></i> <strong>Aparência Padronizada:</strong> O mesmo visual que centenas de concorrentes utilizam.</li>
-                      <li><i class="ri-close-line"></i> <strong>Desorientação do Visitante:</strong> Botões confusos e perda de oportunidades diárias.</li>
-                    </ul>
-                  </div>
-                  <div class="state-col state-metrics-box">
-                    <div class="score-card score-bad">
-                      <span class="score-num">42/100</span>
-                      <span class="score-label">Google PageSpeed Médio</span>
-                    </div>
-                    <div class="score-card score-bad">
-                      <span class="score-num">78%</span>
-                      <span class="score-label">Taxa Média de Rejeição Imediata</span>
-                    </div>
-                  </div>
+            <!-- Assinatura -->
+            <div class="fine-signature-row gsap-fine-sig">
+              <div class="fine-sig-card">
+                <span class="sig-bullet">*</span>
+                <div class="sig-content">
+                  <span class="sig-sub">FILOSOFIA EDITORIAL</span>
+                  <strong class="sig-primary">Design com intenção. Precisão no ajuste.</strong>
                 </div>
               </div>
             </div>
@@ -577,208 +186,333 @@
           </div>
 
         </div>
-      </section>
 
-      <!-- SECTION: PROCESS -->
-      <section class="section-process" id="processo">
-        <div class="container">
-          
-          <div class="section-head text-center">
-            <h2 class="section-title">
-              O Processo do Ajuste Fino <span class="cyan-asterisk">*</span>
-            </h2>
-            <p class="section-desc">
-              Fluxo linear, transparente e sem retrabalho. Do diagnóstico inicial até o lançamento com suporte completo.
-            </p>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SEÇÃO 03: SOBRE MIM (CR DESIGN® / 03 — SOBRE MIM)
+         Fundo claro, tipografia preta expressiva, bloco geométrico azul & transição de placa
+         ========================================================================== -->
+    <!-- ==========================================================================
+         SEÇÃO 03: SOBRE MIM (CR DESIGN® / 03 — MANIFESTO STEPPED PRESENTATION)
+         Pinned stepped-scroll experience with 3 sequential slides (Canva Mockup design)
+         ========================================================================== -->
+    <section class="section-about-wrapper" id="sobre-mim">
+      
+      <div class="about-sticky-stage" id="about-sticky-stage">
+
+        <!-- ==========================================
+             SLIDE 1: O QUE ESTÁ NA TELA (Hero Statement + Silhouette)
+             ========================================== -->
+        <div class="about-slide slide-1 active" id="about-slide-1">
+
+          <!-- Background Corner Accents for Slide 1 (Image 2 mockup - positioned in front of silhouette) -->
+          <div class="slide-corner-asterisk corner-top-right" aria-hidden="true">
+            <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="85" y="10" width="30" height="180" rx="4" fill="#71717a" />
+              <rect x="85" y="10" width="30" height="180" rx="4" fill="#71717a" transform="rotate(60 100 100)" />
+              <rect x="85" y="10" width="30" height="180" rx="4" fill="#71717a" transform="rotate(120 100 100)" />
+            </svg>
+          </div>
+          <div class="slide-corner-asterisk corner-bottom-left" aria-hidden="true">
+            <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="85" y="10" width="30" height="180" rx="4" fill="#000000" />
+              <rect x="85" y="10" width="30" height="180" rx="4" fill="#000000" transform="rotate(60 100 100)" />
+              <rect x="85" y="10" width="30" height="180" rx="4" fill="#000000" transform="rotate(120 100 100)" />
+            </svg>
           </div>
 
-          <div class="process-timeline">
+          <div class="slide-inner container">
             
-            <!-- Step 1 -->
-            <div class="process-step">
-              <div class="step-num-wrap">
-                <span class="step-num">1</span>
-                <span class="step-asterisk">*</span>
-              </div>
-              <div class="step-content">
-                <h3 class="step-title">Diagnóstico</h3>
-                <p class="step-serif-sub">*Mapeamento de Falhas &amp; Oportunidades</p>
-                <p class="step-desc">
-                  Análise profunda do seu mercado, público-alvo e gaps do site atual para traçar o plano de ação ideal.
-                </p>
-              </div>
-            </div>
-
-            <!-- Step 2 -->
-            <div class="process-step">
-              <div class="step-num-wrap">
-                <span class="step-num">2</span>
-                <span class="step-asterisk">*</span>
-              </div>
-              <div class="step-content">
-                <h3 class="step-title">Estratégia</h3>
-                <p class="step-serif-sub">*Estrutura de Conversão &amp; Wireframe</p>
-                <p class="step-desc">
-                  Planejamento da arquitetura da informação, roteirização dos textos de venda e layout dos pontos de contato.
-                </p>
-              </div>
-            </div>
-
-            <!-- Step 3 -->
-            <div class="process-step">
-              <div class="step-num-wrap">
-                <span class="step-num">3</span>
-                <span class="step-asterisk">*</span>
-              </div>
-              <div class="step-content">
-                <h3 class="step-title">Design</h3>
-                <p class="step-serif-sub">*Interface Exclusiva &amp; Micro-Interações</p>
-                <p class="step-desc">
-                  Criação visual de altíssimo padrão no Figma, combinando tipografia editorial, contrastes assertivos e identidade única.
-                </p>
-              </div>
-            </div>
-
-            <!-- Step 4 -->
-            <div class="process-step">
-              <div class="step-num-wrap">
-                <span class="step-num">4</span>
-                <span class="step-asterisk">*</span>
-              </div>
-              <div class="step-content">
-                <h3 class="step-title">Entrega</h3>
-                <p class="step-serif-sub">*Desenvolvimento Otimizado &amp; Publicação</p>
-                <p class="step-desc">
-                  Desenvolvimento em código limpo e de alta velocidade, testes rigorosos de responsividade e colocação no ar.
-                </p>
-              </div>
-            </div>
-
-          </div>
-
-        </div>
-      </section>
-
-      <!-- SECTION: FINAL CTA -->
-      <section class="section-final-cta" id="contato">
-        <div class="container">
-          
-          <div class="final-cta-box">
-            <div class="cta-asterisk-backdrop" aria-hidden="true">*</div>
-
-            <div class="cta-inner">
-              <h2 class="final-cta-title">
-                Pronto para dar o <span class="highlight-title">Ajuste Fino <span class="cyan-asterisk">*</span></span> que a sua marca merece?
+            <!-- Left: Monumental Headline -->
+            <div class="slide-left-col">
+              <h2 class="slide-giant-title">
+                <span class="slide-title-row">Eu não olho só</span>
+                <span class="slide-title-row">para o que está na</span>
+                <span class="slide-title-row text-blue-huge">tela<span class="slide-blue-dot">.</span></span>
               </h2>
-
-              <p class="final-cta-subtitle">
-                Converse diretamente com o Carlos no WhatsApp para avaliar o seu projeto e receber um diagnóstico sob medida.
+              <p class="slide-sub-headline">
+                Olho para o que faz aquilo funcionar.
               </p>
-
-              <div class="cta-action-center">
-                <a href="https://wa.me/5588999549560?text=Ol%C3%A1%20Carlos!%20Estou%20pronto%20para%20dar%20o%20Ajuste%20Fino%20no%20meu%20site%20e%20gostaria%20de%20um%20or%C3%A7amento." 
-                   class="btn-giant-cyan" target="_blank" rel="noopener noreferrer">
-                  <span class="btn-bracket">[</span>
-                  <span class="btn-text">Falar no WhatsApp agora</span>
-                  <span class="btn-bracket">]</span>
-                  <i class="ri-whatsapp-line cta-btn-icon"></i>
-                </a>
+              <div class="slide-micro-tag">
+                <span>DESIGN COM INTENÇÃO. PRECISÃO NO AJUSTE.</span>
               </div>
+            </div>
 
-              <div class="cta-guarantees">
-                <span class="guarantee-item"><span class="cyan-bullet">*</span> Atendimento Direto &bull; Carlos Gletison</span>
-                <span class="guarantee-divider">/</span>
-                <span class="guarantee-item"><span class="cyan-bullet">*</span> Resposta Rápida</span>
-                <span class="guarantee-divider">/</span>
-                <span class="guarantee-item"><span class="cyan-bullet">*</span> Orçamento Personalizado</span>
+            <!-- Right: Carlos Silhouette & Floating Quote -->
+            <div class="slide-right-col silhouette-stage">
+              <div class="silhouette-image-wrapper">
+                <img src="assets/silhouette.png" alt="Silhueta Carlos - CR Design" class="silhouette-img" />
+              </div>
+              <div class="silhouette-quote-bubble">
+                <p class="silhouette-quote-text">
+                  “Fazer com que cada detalhe faça sentido é o que me interessa.”
+                </p>
               </div>
             </div>
 
           </div>
-
         </div>
-      </section>
 
-      <!-- FOOTER -->
-      <footer class="site-footer">
-        <div class="container footer-container">
-          
-          <div class="footer-top">
-            <div class="footer-brand">
-              <a href="#hero-track" class="footer-brand-link" aria-label="CR web design Início">
-                <img src="assets/logo-footer.png" alt="CR web design" class="footer-logo-img">
+        <!-- ==========================================
+             SLIDE 2: TRABALHAR JUNTAS (Narrative 1 + Crosshairs Blueprint)
+             ========================================== -->
+        <div class="about-slide slide-2" id="about-slide-2">
+          <div class="slide-inner container">
+            
+            <!-- Left: Text + Punchline -->
+            <div class="slide-left-col">
+              <p class="slide-lead-narrative">
+                Sou designer e desenvolvedor web. Trabalho entre identidade visual, design digital e movimento, buscando encontrar o ponto em que estética e intenção deixam de competir e começam a
+              </p>
+              <h3 class="slide-punch-headline">
+                trabalhar<br>juntas<span class="slide-black-dot">.</span>
+              </h3>
+            </div>
+
+            <!-- Right: Target Crosshair Blueprint SVG -->
+            <div class="slide-right-col graphic-stage">
+              <div class="blueprint-crosshair-wrap">
+                <svg class="blueprint-crosshair-svg" viewBox="0 0 360 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <!-- 4 Sharp Brackets -->
+                  <path d="M 40 100 L 40 40 L 100 40" stroke="#334155" stroke-width="12" stroke-linecap="square" stroke-linejoin="miter" fill="none"/>
+                  <path d="M 260 40 L 320 40 L 320 100" stroke="#334155" stroke-width="12" stroke-linecap="square" stroke-linejoin="miter" fill="none"/>
+                  <path d="M 40 260 L 40 320 L 100 320" stroke="#334155" stroke-width="12" stroke-linecap="square" stroke-linejoin="miter" fill="none"/>
+                  <path d="M 260 320 L 320 320 L 320 260" stroke="#334155" stroke-width="12" stroke-linecap="square" stroke-linejoin="miter" fill="none"/>
+                  
+                  <!-- Dashed Electric Blue Crosshairs -->
+                  <line x1="38" y1="180" x2="322" y2="180" stroke="#0d5bff" stroke-width="10" stroke-dasharray="16 12" stroke-linecap="butt"/>
+                  <line x1="180" y1="38" x2="180" y2="322" stroke="#0d5bff" stroke-width="10" stroke-dasharray="16 12" stroke-linecap="butt"/>
+                  
+                  <!-- Center Core Junction -->
+                  <rect x="174" y="174" width="12" height="12" fill="#0d5bff" />
+                </svg>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ==========================================
+             SLIDE 3: MOTIVO PARA EXISTIR (Narrative 2 + Logo Grid Blueprint)
+             ========================================== -->
+        <div class="about-slide slide-3" id="about-slide-3">
+          <div class="slide-inner container">
+            
+            <!-- Left: Text + Punchline -->
+            <div class="slide-left-col">
+              <p class="slide-lead-narrative">
+                Gosto de entender o problema antes de escolher a forma. De questionar o óbvio, ajustar o que parece pequeno e construir soluções em que cada decisão tenha um
+              </p>
+              <h3 class="slide-punch-headline">
+                motivo<br>para<br>existir<span class="slide-black-dot">.</span>
+              </h3>
+            </div>
+
+            <!-- Right: Logo Geometry Construction + 3 App Icons -->
+            <div class="slide-right-col blueprint-diagram-stage">
+              
+              <!-- Blueprint Construction Graphic -->
+              <div class="blueprint-logo-construction">
+                <svg class="blueprint-logo-svg" viewBox="0 0 340 340" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <!-- Guideline Grid (Subtle architectural lines) -->
+                  <line x1="0" y1="20" x2="340" y2="20" stroke="#cbd5e1" stroke-width="1.2" />
+                  <line x1="0" y1="320" x2="340" y2="320" stroke="#cbd5e1" stroke-width="1.2" />
+                  <line x1="20" y1="0" x2="20" y2="340" stroke="#cbd5e1" stroke-width="1.2" />
+                  <line x1="130" y1="0" x2="130" y2="340" stroke="#cbd5e1" stroke-width="1.2" />
+                  <line x1="170" y1="0" x2="170" y2="340" stroke="#cbd5e1" stroke-width="1.2" />
+                  <line x1="210" y1="0" x2="210" y2="340" stroke="#cbd5e1" stroke-width="1.2" />
+                  <line x1="320" y1="0" x2="320" y2="340" stroke="#cbd5e1" stroke-width="1.2" />
+                  
+                  <!-- Diagonals & Circles -->
+                  <line x1="20" y1="20" x2="320" y2="320" stroke="#cbd5e1" stroke-width="1.2" />
+                  <line x1="320" y1="20" x2="20" y2="320" stroke="#cbd5e1" stroke-width="1.2" />
+                  <circle cx="170" cy="170" r="150" stroke="#cbd5e1" stroke-width="1.2" fill="none" />
+                  <circle cx="170" cy="75" r="55" stroke="#94a3b8" stroke-width="1" fill="none" />
+                  <circle cx="265" cy="170" r="55" stroke="#94a3b8" stroke-width="1" fill="none" />
+                  <circle cx="75" cy="265" r="55" stroke="#94a3b8" stroke-width="1" fill="none" />
+                  <rect x="20" y="20" width="300" height="300" stroke="#64748b" stroke-width="1.5" fill="none" />
+
+                  <!-- Geometric Asterisk Petals (Solid Blue #0d5bff) -->
+                  <!-- Top Left to Center -->
+                  <path d="M 20 20 L 75 20 L 170 170 L 115 170 Z" fill="#0d5bff" />
+                  <!-- Top Center U-shape -->
+                  <path d="M 130 20 L 170 20 L 170 120 C 170 145 145 145 145 120 L 145 20 Z" fill="#0d5bff" />
+                  <!-- Top Right Diagonal -->
+                  <path d="M 320 20 L 320 75 L 170 170 L 170 115 Z" fill="#0d5bff" />
+                  <!-- Right Horizontal Petal -->
+                  <path d="M 320 130 L 320 170 L 220 170 C 195 170 195 145 220 145 L 320 145 Z" fill="#0d5bff" />
+                  <!-- Bottom Right Diagonal -->
+                  <path d="M 320 320 L 265 320 L 170 170 L 225 170 Z" fill="#0d5bff" />
+                  <!-- Bottom Center U-shape -->
+                  <path d="M 170 320 L 130 320 L 130 220 C 130 195 155 195 155 220 L 155 320 Z" fill="#0d5bff" />
+                  <!-- Bottom Left Diagonal -->
+                  <path d="M 20 320 L 20 265 L 170 170 L 170 225 Z" fill="#0d5bff" />
+                  <!-- Left Horizontal Petal -->
+                  <path d="M 20 170 L 20 130 L 120 130 C 145 130 145 155 120 155 L 20 155 Z" fill="#0d5bff" />
+                </svg>
+              </div>
+
+              <!-- 3 Stacked App Icon Badges -->
+              <div class="blueprint-badge-stack">
+                <!-- 1. Black Icon Badge -->
+                <div class="app-icon-badge badge-black" title="CR Asterisk - Obsidian">
+                  <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="42" y="10" width="16" height="80" rx="3" fill="#0d5bff" />
+                    <rect x="42" y="10" width="16" height="80" rx="3" fill="#0d5bff" transform="rotate(60 50 50)" />
+                    <rect x="42" y="10" width="16" height="80" rx="3" fill="#0d5bff" transform="rotate(120 50 50)" />
+                  </svg>
+                </div>
+
+                <!-- 2. White Icon Badge -->
+                <div class="app-icon-badge badge-white" title="CR Asterisk - Pure White">
+                  <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="42" y="10" width="16" height="80" rx="3" fill="#0d5bff" />
+                    <rect x="42" y="10" width="16" height="80" rx="3" fill="#0d5bff" transform="rotate(60 50 50)" />
+                    <rect x="42" y="10" width="16" height="80" rx="3" fill="#0d5bff" transform="rotate(120 50 50)" />
+                  </svg>
+                </div>
+
+                <!-- 3. Royal Blue Icon Badge -->
+                <div class="app-icon-badge badge-blue" title="CR Asterisk - Royal Electric Blue">
+                  <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="42" y="10" width="16" height="80" rx="3" fill="#FFFFFF" />
+                    <rect x="42" y="10" width="16" height="80" rx="3" fill="#FFFFFF" transform="rotate(60 50 50)" />
+                    <rect x="42" y="10" width="16" height="80" rx="3" fill="#FFFFFF" transform="rotate(120 50 50)" />
+                  </svg>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ==========================================================================
+         SEÇÃO 04: VISUAL PLAYGROUND (CR DESIGN® — 04 / VISUAL PLAYGROUND)
+         Fundo azul chapado, asterisco monumental branco sólido & tipografia de alto impacto
+         ========================================================================== -->
+    <section class="section-playground" id="visual-playground">
+      
+      <!-- MONUMENTAL SOLID WHITE ASTERISK (100% OPAQUE - OCCUPYING HALF SCREEN) -->
+      <div class="playground-solid-asterisk-stage" aria-hidden="true">
+        <svg class="playground-giant-asterisk-svg" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="85" y="6" width="30" height="188" rx="0" fill="#FFFFFF" />
+          <rect x="85" y="6" width="30" height="188" rx="0" fill="#FFFFFF" transform="rotate(60 100 100)" />
+          <rect x="85" y="6" width="30" height="188" rx="0" fill="#FFFFFF" transform="rotate(120 100 100)" />
+        </svg>
+      </div>
+
+      <div class="playground-container">
+        
+        <!-- SECTION OPENING & MANIFESTO -->
+        <header class="playground-header">
+
+          <!-- Monumental Headline with Editorial Expression -->
+          <div class="playground-headline-wrap">
+            <h2 class="playground-monumental-title">
+              <span class="pg-title-lead gsap-pg-title">Ideias não nascem<br>para ficar</span>
+              <div class="pg-highlight-block gsap-pg-title">
+                <span class="pg-word-line line-dentro">DENTRO DE</span>
+                <span class="pg-word-line line-quadrados">QUADRADOS</span>
+              </div>
+            </h2>
+          </div>
+
+          <!-- Narrative Editorial Grid (Clean Text with Vertical Accent Bars) -->
+          <div class="playground-manifesto-grid">
+            
+            <div class="pg-manifesto-col gsap-pg-text">
+              <div class="pg-text-item">
+                <span class="pg-text-line-marker"></span>
+                <p class="pg-lead-p">
+                  Elas pedem espaço. Contraste. Movimento. Às vezes, pedem que a gente desmonte tudo para encontrar uma solução melhor.
+                </p>
+              </div>
+              <div class="pg-text-item">
+                <span class="pg-text-line-marker"></span>
+                <p class="pg-body-p">
+                  Aqui, design não é uma fórmula repetida. Cada projeto começa com um problema diferente e ganha uma linguagem própria.
+                </p>
+              </div>
+            </div>
+
+            <div class="pg-signature-col gsap-pg-text">
+              <div class="pg-signature-item">
+                <span class="pg-text-line-marker"></span>
+                <p class="pg-sig-statement">
+                  TRABALHOS REAIS. DECISÕES INTENCIONAIS. EXPERIMENTAÇÃO SEM FÓRMULA.
+                </p>
+              </div>
+
+              <!-- Primary Action Link to /projetos (Rounded button with hard solid shadow) -->
+              <a href="projetos.html" class="pg-action-btn magnetic-btn" id="btn-ver-projetos">
+                <span class="pg-btn-text">VER MEUS PROJETOS</span>
+                <i class="ri-arrow-right-up-line pg-btn-icon"></i>
               </a>
-              <p class="footer-tagline">
-                Design minimalista, estratégico e focado em conversão. Onde cada pixel cumpre um papel comercial claro.
-              </p>
             </div>
 
-            <div class="footer-links-group">
-              <div class="footer-col">
-                <span class="footer-col-title">NAVEGAÇÃO</span>
-                <ul class="footer-list">
-                  <li><a href="#hero-track">Início</a></li>
-                  <li><a href="#ajuste-de-rota">Diagnóstico</a></li>
-                  <li><a href="#conceito">O Conceito *</a></li>
-                  <li><a href="#servicos">Serviços</a></li>
-                  <li><a href="#processo">Processo</a></li>
-                </ul>
-              </div>
-
-              <div class="footer-col">
-                <span class="footer-col-title">CONTATO &amp; REDES</span>
-                <ul class="footer-list">
-                  <li>
-                    <a href="https://wa.me/5588999549560?text=Ol%C3%A1%20Carlos!%20Vim%20pelo%20site%20da%20CR%20web%20design." target="_blank" rel="noopener noreferrer">
-                      <i class="ri-whatsapp-line"></i> WhatsApp (+55 88 99954-9560)
-                    </a>
-                  </li>
-                  <li>
-                    <a href="https://www.instagram.com/cr.design._/" target="_blank" rel="noopener noreferrer">
-                      <i class="ri-instagram-line"></i> @cr.design._ (Estúdio)
-                    </a>
-                  </li>
-                  <li>
-                    <a href="https://www.instagram.com/carlos_diass.21/" target="_blank" rel="noopener noreferrer">
-                      <i class="ri-instagram-line"></i> @carlos_diass.21 (Pessoal)
-                    </a>
-                  </li>
-                  <li>
-                    <a href="https://www.linkedin.com/in/carlos-gletison-b3986b3b4/" target="_blank" rel="noopener noreferrer">
-                      <i class="ri-linkedin-fill"></i> LinkedIn (Carlos Gletison)
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </div>
           </div>
 
-          <div class="footer-bottom">
-            <p class="footer-copyright">
-              &copy; 2026 CR web design &bull; Carlos Gletison. Todos os direitos reservados.
-            </p>
-            <p class="footer-concept-note">
-              <span class="cyan-bullet">*</span> Arquitetura editorial concebida sob o princípio da precisão absoluta.
-            </p>
-          </div>
+        </header>
 
-        </div>
-      </footer>
-
-    </div>
+      </div>
+    </section>
   </main>
 
-  <!-- FLOATING WHATSAPP BUTTON -->
-  <a href="https://wa.me/5588999549560?text=Ol%C3%A1%20Carlos!%20Gostaria%20de%20falar%20sobre%20um%20projeto%20com%20Ajuste%20Fino." 
-     class="floating-whatsapp" target="_blank" rel="noopener noreferrer" aria-label="Falar no WhatsApp com Carlos">
-    <div class="whatsapp-inner">
-      <i class="ri-whatsapp-line"></i>
-      <span class="floating-asterisk">*</span>
-    </div>
-    <span class="floating-tooltip">Falar com Carlos *</span>
-  </a>
+  <!-- ==========================================================================
+       PROJECT QUICK-INSPECTOR MODAL (HIGH RESOLUTION LIGHTBOX)
+       ========================================================================== -->
+  <div class="project-modal-overlay" id="project-modal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="project-modal-dialog">
+      
+      <div class="modal-top-bar">
+        <div class="modal-badge-row">
+          <span class="modal-pill-tag">CR DESIGN® ARCHIVE</span>
+          <span class="modal-cat-tag" id="modal-project-cat">Categoria</span>
+        </div>
+        <button class="modal-close-btn" id="modal-close-btn" aria-label="Fechar detalhes do projeto">
+          <i class="ri-close-line"></i>
+        </button>
+      </div>
 
-  <!-- Interactive Script -->
+      <div class="modal-body-layout">
+        <div class="modal-visual-frame">
+          <img id="modal-project-img" src="" alt="Visual do Projeto" class="modal-img">
+          <div class="modal-frame-corner top-left" aria-hidden="true"></div>
+          <div class="modal-frame-corner bottom-right" aria-hidden="true"></div>
+        </div>
+        
+        <div class="modal-info-panel">
+          <span class="modal-spec-stamp">[ ESPECIFICAÇÃO DO PROJETO ]</span>
+          <h3 class="modal-project-title" id="modal-project-title">Título do Projeto</h3>
+          
+          <div class="modal-metric-badge">
+            <span class="metric-asterisk">*</span>
+            <span id="modal-project-metric">Métrica / Destaque</span>
+          </div>
+
+          <p class="modal-project-desc" id="modal-project-desc">Descrição do projeto.</p>
+
+          <div class="modal-actions-row">
+            <a id="modal-whatsapp-cta" href="https://wa.me/5588999549560?text=Ol%C3%A1%20Carlos!%20Gostei%20do%20projeto%20no%20Visual%20Playground%20e%20gostaria%20de%20conversar%20sobre%20um%20projeto%20semelhante." 
+               class="btn-modal-cta magnetic-btn" target="_blank" rel="noopener noreferrer">
+              <span>Quero um Projeto com esse Padrão</span>
+              <span class="btn-asterisk">*</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Interactive Script with GSAP ScrollTrigger -->
   <script src="script.js"></script>
 </body>
 </html>

@@ -1,0 +1,587 @@
+/* ==========================================================================
+   CR DESIGN® — PORTFÓLIO DE PROJETOS (EXPOSIÇÃO IMERSIVA EM TELA AMPLA)
+   Theme: Royal Blue #0d5bff + Deep Black #000000 + Stark White #FFFFFF
+   ========================================================================== */
+
+/* --- CSS Reset & Base --- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --blue-primary: #0d5bff;
+  --blue-hover: #0947cc;
+  --bg-black: #000000;
+  --bg-obsidian: #0E121A;
+  --bg-white: #FFFFFF;
+  --cyan-accent: #00E5FF;
+  
+  --font-heading: 'Poppins', sans-serif;
+  --font-body: 'Public Sans', sans-serif;
+  --font-mono: 'Space Mono', monospace;
+  --font-asterisk: 'Montserrat', sans-serif;
+}
+
+body.portfolio-body {
+  background-color: var(--blue-primary);
+  color: var(--bg-white);
+  font-family: var(--font-body);
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Main Screen Stage */
+.portfolio-stage {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 1.25rem 2rem 1.5rem;
+  min-height: 100vh;
+  min-height: 100dvh;
+  position: relative;
+}
+
+/* ==========================================================================
+   1. TOP NAVIGATION BAR
+   ========================================================================== */
+.portfolio-top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #000000;
+}
+
+.portfolio-brand-link {
+  color: #FFFFFF;
+  text-decoration: none;
+  font-family: var(--font-mono);
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+}
+
+.portfolio-brand-link:hover {
+  opacity: 0.85;
+  transform: translateX(2px);
+}
+
+.portfolio-archive-tag {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: #FFFFFF;
+}
+
+.portfolio-close-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: #FFFFFF;
+  text-decoration: none;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  background: #000000;
+  border: 2px solid #000000;
+  padding: 0.4rem 0.9rem;
+  border-radius: 4px;
+  box-shadow: 3px 3px 0px #000000;
+  transition: all 0.2s ease;
+}
+
+.portfolio-close-btn:hover {
+  background: #FFFFFF;
+  color: #000000;
+  box-shadow: 4px 4px 0px #000000;
+  transform: translate(-1px, -1px);
+}
+
+.close-symbol {
+  font-size: 1.15rem;
+  line-height: 1;
+}
+
+/* ==========================================================================
+   2. METADATA SUB-HEADER STRIP
+   ========================================================================== */
+.portfolio-meta-strip {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 0.85rem 0;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.meta-strip-left {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: #FFFFFF;
+}
+
+.meta-project-index {
+  color: #000000;
+  background: #FFFFFF;
+  padding: 0.15rem 0.45rem;
+  border-radius: 2px;
+  font-weight: 900;
+}
+
+.meta-sep {
+  color: #000000;
+  font-weight: 900;
+}
+
+.meta-project-category {
+  color: #FFFFFF;
+  font-weight: 800;
+  text-shadow: 1px 1px 0px #000000;
+}
+
+.meta-strip-filters {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.filter-pill {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 0.35rem 0.75rem;
+  background: transparent;
+  color: #FFFFFF;
+  border: 1.5px solid rgba(255, 255, 255, 0.4);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.filter-pill:hover {
+  background: #000000;
+  border-color: #000000;
+  color: #FFFFFF;
+}
+
+.filter-pill.active {
+  background: #000000;
+  color: #FFFFFF;
+  border-color: #000000;
+  box-shadow: 2px 2px 0px #FFFFFF;
+}
+
+.meta-strip-right {
+  color: #FFFFFF;
+  font-weight: 800;
+  background: #000000;
+  padding: 0.25rem 0.65rem;
+  border-radius: 2px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* ==========================================================================
+   3. CENTRAL IMMERSIVE SHOWCASE CANVAS
+   ========================================================================== */
+.portfolio-showcase-container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 0 1.25rem;
+  width: 100%;
+}
+
+.portfolio-card-frame {
+  width: 100%;
+  background: #FFFFFF;
+  border: 3px solid #000000;
+  border-radius: 12px;
+  box-shadow: 10px 10px 0px #000000;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.portfolio-card-frame.fade-out {
+  opacity: 0;
+  transform: scale(0.98);
+}
+
+/* --- Top Black Plaque Header --- */
+.showcase-plaque-header {
+  background: var(--bg-obsidian);
+  color: #FFFFFF;
+  padding: 1.25rem 1.75rem;
+  border-bottom: 2px solid #000000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.plaque-info-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.plaque-tag {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: #94A3B8;
+  text-transform: uppercase;
+}
+
+.plaque-title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.6rem, 2.8vw, 2.4rem);
+  font-weight: 900;
+  color: #FFFFFF;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+.plaque-subtitle {
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  color: #CBD5E1;
+  font-weight: 500;
+}
+
+.plaque-actions {
+  display: flex;
+  align-items: center;
+}
+
+.plaque-contact-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--blue-primary);
+  color: #FFFFFF;
+  text-decoration: none;
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  padding: 0.65rem 1.2rem;
+  border: 2px solid var(--blue-primary);
+  border-radius: 6px;
+  box-shadow: 4px 4px 0px #000000;
+  transition: all 0.2s ease;
+}
+
+.plaque-contact-btn:hover {
+  background: #FFFFFF;
+  color: #000000;
+  border-color: #FFFFFF;
+  box-shadow: 6px 6px 0px var(--blue-primary);
+  transform: translate(-2px, -2px);
+}
+
+.contact-asterisk {
+  font-family: var(--font-asterisk);
+  font-size: 1rem;
+  line-height: 1;
+}
+
+/* --- Real Screenshot Visual Surface --- */
+.showcase-visual-surface {
+  position: relative;
+  width: 100%;
+  height: clamp(340px, 52vh, 620px);
+  background: #000000;
+  overflow: hidden;
+}
+
+.surface-media-wrap {
+  width: 100%;
+  height: 100%;
+}
+
+.showcase-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.portfolio-card-frame:hover .showcase-img {
+  transform: scale(1.02);
+}
+
+.surface-badge-corner {
+  position: absolute;
+  z-index: 5;
+}
+
+.surface-badge-corner.top-right {
+  top: 14px;
+  right: 14px;
+}
+
+.surface-source-tag {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  background: #000000;
+  color: #FFFFFF;
+  padding: 0.3rem 0.75rem;
+  border: 1.5px solid #FFFFFF;
+  box-shadow: 3px 3px 0px #000000;
+}
+
+/* --- Descriptive Editorial Data Bar --- */
+.showcase-data-bar {
+  background: #FAFAFB;
+  color: #000000;
+  padding: 1.1rem 1.75rem;
+  border-top: 2px solid #000000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.data-bar-left {
+  flex: 1.4;
+  min-width: 280px;
+}
+
+.project-brief-desc {
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: #1E293B;
+  font-weight: 500;
+}
+
+.data-bar-right {
+  flex: 1;
+  min-width: 260px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.spec-capsule {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  background: #FFFFFF;
+  border: 1.5px solid #000000;
+  padding: 0.5rem 0.9rem;
+  border-radius: 4px;
+  box-shadow: 3px 3px 0px #000000;
+}
+
+.spec-capsule-label {
+  color: #64748B;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+}
+
+.spec-capsule-val {
+  color: #000000;
+  font-weight: 800;
+}
+
+/* ==========================================================================
+   4. BOTTOM NAVIGATION & CONTROLS FOOTER
+   ========================================================================== */
+.portfolio-bottom-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 0.75rem;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.nav-control-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: #000000;
+  color: #FFFFFF;
+  border: 2px solid #000000;
+  padding: 0.85rem 1.6rem;
+  border-radius: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.84rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  box-shadow: 4px 4px 0px #FFFFFF;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.nav-control-btn:hover {
+  background: #FFFFFF;
+  color: #000000;
+  box-shadow: 6px 6px 0px #000000;
+  transform: translate(-2px, -2px);
+}
+
+.nav-control-btn:active {
+  transform: translate(1px, 1px);
+  box-shadow: 2px 2px 0px #000000;
+}
+
+/* Direct Project Dots / Numbers */
+.project-direct-indices {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.index-dot-btn {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 800;
+  background: transparent;
+  color: #FFFFFF;
+  border: 1.5px solid #FFFFFF;
+  padding: 0.35rem 0.7rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.index-dot-btn:hover {
+  background: #000000;
+  border-color: #000000;
+  color: #FFFFFF;
+}
+
+.index-dot-btn.active {
+  background: #FFFFFF;
+  color: #000000;
+  border-color: #FFFFFF;
+  box-shadow: 3px 3px 0px #000000;
+}
+
+/* Keyboard Helper Hint */
+.keyboard-helper-hint {
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.75);
+  padding-top: 0.6rem;
+  letter-spacing: 0.08em;
+}
+
+.keyboard-helper-hint kbd {
+  background: #000000;
+  color: #FFFFFF;
+  padding: 0.1rem 0.35rem;
+  border-radius: 3px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  font-family: inherit;
+}
+
+/* ==========================================================================
+   5. RESPONSIVE DESIGN (MOBILE & TABLET)
+   ========================================================================== */
+@media (max-width: 900px) {
+  .portfolio-stage {
+    padding: 1rem 1rem 1.25rem;
+  }
+
+  .meta-strip-filters {
+    order: 3;
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .showcase-plaque-header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1.2rem 1.2rem;
+    gap: 1rem;
+  }
+
+  .plaque-actions {
+    width: 100%;
+  }
+
+  .plaque-contact-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .showcase-visual-surface {
+    height: 280px;
+  }
+
+  .showcase-data-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1.2rem;
+    gap: 1rem;
+  }
+
+  .data-bar-right {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .spec-capsule {
+    width: 100%;
+  }
+
+  .portfolio-bottom-nav {
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+  }
+
+  .nav-control-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .project-direct-indices {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .keyboard-helper-hint {
+    display: none;
+  }
+}

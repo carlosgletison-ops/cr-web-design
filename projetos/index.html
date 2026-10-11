@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfólio de Projetos — CR Design®</title>
+  <meta name="description" content="Exposição digital de design autoral e projetos reais desenvolvidos por CR Design (Carlos Gletison).">
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+
+  <!-- Google Fonts: Montserrat, Poppins, Public Sans, Space Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@1,400;1,600&family=Montserrat:ital,wght@0,500;0,700;0,800;0,900;1,700&family=Poppins:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700&family=Public+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+  <!-- Remix Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+
+  <!-- Project Stylesheet -->
+  <link rel="stylesheet" href="../projetos.css">
+</head>
+<body class="portfolio-body">
+
+  <!-- MAIN FULL-SCREEN IMMERSIVE PORTFOLIO WRAPPER -->
+  <main class="portfolio-stage" id="portfolio-stage">
+
+    <!-- TOP NAVIGATION BAR -->
+    <header class="portfolio-top-bar">
+      <div class="top-bar-left">
+        <a href="../index.html#visual-playground" class="portfolio-brand-link" aria-label="Voltar para a página inicial">
+          <span class="brand-text">CR DESIGN ®</span>
+        </a>
+      </div>
+
+      <div class="top-bar-center">
+        <span class="portfolio-archive-tag">PORTFÓLIO — 2026</span>
+      </div>
+
+      <div class="top-bar-right">
+        <a href="../index.html#visual-playground" class="portfolio-close-btn" id="btn-close-portfolio" aria-label="Fechar e voltar para o site">
+          <span class="close-text">FECHAR</span>
+          <span class="close-symbol">×</span>
+        </a>
+      </div>
+    </header>
+
+    <!-- METADATA SUB-HEADER STRIP -->
+    <div class="portfolio-meta-strip">
+      <div class="meta-strip-left">
+        <span class="meta-project-index" id="meta-project-index">01</span>
+        <span class="meta-sep">/</span>
+        <span class="meta-project-category" id="meta-project-category">E-COMMERCE & LUXO</span>
+      </div>
+
+      <!-- Quick Category Filter Selector -->
+      <div class="meta-strip-filters" role="tablist" aria-label="Filtrar Projetos por Disciplina">
+        <button class="filter-pill active" data-filter="all" role="tab" aria-selected="true">TODOS (06)</button>
+        <button class="filter-pill" data-filter="ecommerce" role="tab" aria-selected="false">E-COMMERCE (02)</button>
+        <button class="filter-pill" data-filter="marketing" role="tab" aria-selected="false">PERFORMANCE (02)</button>
+        <button class="filter-pill" data-filter="institucional" role="tab" aria-selected="false">B2B (02)</button>
+      </div>
+
+      <div class="meta-strip-right">
+        <span class="meta-counter" id="meta-project-counter">01 DE 06</span>
+      </div>
+    </div>
+
+    <!-- CENTRAL IMMERSIVE SHOWCASE CANVAS -->
+    <section class="portfolio-showcase-container" id="portfolio-container" aria-live="polite">
+      
+      <div class="portfolio-card-frame" id="project-card">
+        
+        <!-- Top Black Plaque Header -->
+        <div class="showcase-plaque-header">
+          <div class="plaque-info-group">
+            <span class="plaque-tag" id="project-tag">PROJETO EM DESTAQUE</span>
+            <h1 class="plaque-title" id="project-title">KAUÊ JOIAS</h1>
+            <span class="plaque-subtitle" id="project-subtitle">E-commerce de Luxo · Alta Joalheria Contemporânea</span>
+          </div>
+
+          <div class="plaque-actions">
+            <a id="project-whatsapp-cta" href="#" class="plaque-contact-btn" target="_blank" rel="noopener noreferrer" aria-label="Conversar sobre este projeto">
+              <i class="ri-whatsapp-line"></i>
+              <span class="contact-btn-txt">SOLICITAR PROJETO SIMILAR</span>
+              <span class="contact-asterisk">*</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Real Screenshot Visual Surface -->
+        <div class="showcase-visual-surface">
+          <div class="surface-media-wrap">
+            <img id="project-image" src="../assets/projects/project-joias.png" alt="Kauê Joias" class="showcase-img">
+          </div>
+          
+          <div class="surface-badge-corner top-right">
+            <span class="surface-source-tag" id="project-badge">ARCHIVE // HIGH JEWELRY</span>
+          </div>
+        </div>
+
+        <!-- Descriptive Editorial Data Bar -->
+        <div class="showcase-data-bar">
+          <div class="data-bar-left">
+            <p class="project-brief-desc" id="project-desc">
+              Concepção visual e desenvolvimento de e-commerce de alto padrão para joalheria contemporânea, priorizando catálogo imersivo, tipografia refinada e valorização artística do produto.
+            </p>
+          </div>
+          <div class="data-bar-right">
+            <div class="spec-capsule">
+              <span class="spec-capsule-label">ESTRATÉGIA & ENTREGA:</span>
+              <span class="spec-capsule-val" id="project-spec">Catálogo Editorial & Conversão · Checkout Ágil</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- BOTTOM NAVIGATION & CONTROLS FOOTER -->
+    <footer class="portfolio-bottom-nav">
+      
+      <!-- Prev Button -->
+      <button class="nav-control-btn prev-btn" id="btn-prev-project" aria-label="Projeto Anterior">
+        <i class="ri-arrow-left-line"></i>
+        <span class="nav-btn-label">ANTERIOR</span>
+      </button>
+
+      <!-- Project Dots / Index Selector -->
+      <nav class="project-direct-indices" id="project-indices" aria-label="Selecionar projeto diretamente">
+        <!-- Rendered by JS -->
+      </nav>
+
+      <!-- Next Button -->
+      <button class="nav-control-btn next-btn" id="btn-next-project" aria-label="Próximo Projeto">
+        <span class="nav-btn-label">PRÓXIMO PROJETO</span>
+        <i class="ri-arrow-right-line"></i>
+      </button>
+
+    </footer>
+
+    <!-- KEYBOARD HELPER HINT -->
+    <div class="keyboard-helper-hint" aria-hidden="true">
+      <span>Use <kbd>←</kbd> <kbd>→</kbd> para navegar &middot; <kbd>ESC</kbd> para fechar</span>
+    </div>
+
+  </main>
+
+  <script>
+    // Path correction for subfolder
+    window.ASSET_PREFIX = '../';
+  </script>
+  <script src="../projetos.js"></script>
+</body>
+</html>
